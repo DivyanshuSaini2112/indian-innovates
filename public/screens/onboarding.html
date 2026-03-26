@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FloodSense India - Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#091421",
+                        "on-tertiary": "#003827",
+                        "on-secondary-fixed-variant": "#812800",
+                        "on-secondary-fixed": "#380d00",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#be3f01",
+                        "outline": "#8b919e",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#2b3544",
+                        "error": "#ffb4ab",
+                        "surface": "#091421",
+                        "surface-container-high": "#202b39",
+                        "primary-container": "#1a6fd4",
+                        "secondary-fixed-dim": "#ffb59b",
+                        "on-secondary-container": "#ffe7e0",
+                        "secondary": "#ffb59b",
+                        "surface-container": "#16202e",
+                        "surface-tint": "#aac7ff",
+                        "on-surface-variant": "#c1c6d5",
+                        "primary": "#aac7ff",
+                        "inverse-surface": "#d8e3f6",
+                        "on-background": "#d8e3f6",
+                        "on-tertiary-fixed-variant": "#00513a",
+                        "tertiary": "#68dbae",
+                        "secondary-fixed": "#ffdbcf",
+                        "tertiary-fixed-dim": "#68dbae",
+                        "on-tertiary-fixed": "#002115",
+                        "inverse-primary": "#005db9",
+                        "on-primary": "#002f64",
+                        "tertiary-fixed": "#86f8c9",
+                        "surface-container-lowest": "#040f1c",
+                        "surface-dim": "#091421",
+                        "on-primary-container": "#f4f5ff",
+                        "on-secondary": "#5b1a00",
+                        "on-surface": "#d8e3f6",
+                        "surface-variant": "#2b3544",
+                        "surface-container-low": "#111c2a",
+                        "surface-bright": "#2f3a49",
+                        "primary-fixed": "#d6e3ff",
+                        "primary-fixed-dim": "#aac7ff",
+                        "on-primary-fixed": "#001b3e",
+                        "outline-variant": "#414753",
+                        "on-primary-fixed-variant": "#00458d",
+                        "on-tertiary-container": "#d5ffe9",
+                        "tertiary-container": "#00805d",
+                        "inverse-on-surface": "#26313f",
+                        "on-error": "#690005"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .ghost-border {
+            border: 1px solid rgba(139, 145, 158, 0.15);
+        }
+        .map-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col items-center justify-center p-6 selection:bg-primary-container selection:text-on-primary-container">
+<style>
+  #fs-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+    background: rgba(2,11,24,0.92); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 24px; font-family: 'Inter', sans-serif;
+  }
+  #fs-nav a { color: rgba(240,244,255,0.65); text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+  #fs-nav a:hover { color: #F0F4FF; background: rgba(255,255,255,0.06); }
+  #fs-nav .logo { font-weight: 700; letter-spacing: 0.15em; font-size: 14px; color: #F0F4FF; }
+  #fs-nav .logo span { color: #1A6FD4; }
+  body { padding-top: 52px !important; }
+</style>
+<div id="fs-nav">
+  <a class="logo" href="/screens/splash.html">FLOOD<span>SENSE</span></a>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/dashboard.html">Dashboard</a>
+    <a href="/screens/map.html">Live Map</a>
+    <a href="/screens/my-districts.html">My Districts</a>
+    <a href="/screens/alerts.html">Alerts</a>
+    <a href="/screens/reports.html">Reports</a>
+  </div>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/profile.html">Profile</a>
+    <a href="/screens/settings.html">Settings</a>
+    <a href="/screens/login.html" style="border:1px solid rgba(26,111,212,0.4);color:#1A6FD4;">Sign In</a>
+  </div>
+</div>
+<!-- Progress Indicator -->
+<div class="fixed top-12 left-0 w-full flex justify-center gap-3 z-50">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(170,199,255,0.5)]"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+</div>
+<!-- Main Onboarding Shell -->
+<main class="w-full max-w-5xl glass-card rounded-lg overflow-hidden flex flex-col md:flex-row min-h-[600px] relative">
+<!-- Content Column -->
+<div class="flex-1 p-8 md:p-12 flex flex-col">
+<header class="mb-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="water_drop">water_drop</span>
+<span class="font-headline font-bold tracking-tighter text-primary">FloodSense India</span>
+</div>
+<h1 class="font-headline text-4xl md:text-5xl font-bold text-on-surface mb-4 leading-tight">
+                    Which districts <br/>matter to you?
+                </h1>
+<p class="text-on-surface-variant text-lg max-w-md">
+                    Select the regions you want to monitor for real-time telemetry and flood alerts.
+                </p>
+</header>
+<!-- Search Area -->
+<div class="relative mb-8">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+</div>
+<input class="w-full bg-surface-container-highest/50 border-none rounded-md py-4 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/50 focus:ring-2 focus:ring-primary/40 transition-all font-body" placeholder="Search districts (e.g. Pune, Wayanad...)" type="text"/>
+</div>
+<!-- Chips Container -->
+<div class="flex flex-wrap gap-3 mb-12">
+<!-- Selected Chip -->
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-container text-on-primary-container font-medium text-sm transition-transform active:scale-95">
+                    Wayanad
+                    <span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-container text-on-primary-container font-medium text-sm transition-transform active:scale-95">
+                    Pune
+                    <span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-container text-on-primary-container font-medium text-sm transition-transform active:scale-95">
+                    Chennai
+                    <span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+<!-- Suggested Chips -->
+<button class="px-5 py-2.5 rounded-full ghost-border text-on-surface-variant font-medium text-sm hover:bg-white/5 transition-colors">
+                    Mumbai
+                </button>
+<button class="px-5 py-2.5 rounded-full ghost-border text-on-surface-variant font-medium text-sm hover:bg-white/5 transition-colors">
+                    Kolkata
+                </button>
+<button class="px-5 py-2.5 rounded-full ghost-border text-on-surface-variant font-medium text-sm hover:bg-white/5 transition-colors">
+                    Guwahati
+                </button>
+<button class="px-5 py-2.5 rounded-full ghost-border text-on-surface-variant font-medium text-sm hover:bg-white/5 transition-colors">
+                    Patna
+                </button>
+</div>
+<!-- Action Footer -->
+<div class="mt-auto flex items-center justify-between pt-8 border-t border-white/5">
+<button class="flex items-center gap-2 px-6 py-3 rounded-full text-outline cursor-not-allowed opacity-50 font-medium transition-opacity" disabled="">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+                    Back
+                </button>
+<button class="flex items-center gap-2 px-8 py-3 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all active:scale-95">
+                    Next Step
+                    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Visual/Map Column -->
+<div class="hidden md:flex flex-1 bg-surface-container-low/30 items-center justify-center p-12 relative overflow-hidden">
+<!-- Decorative background elements -->
+<div class="absolute top-1/4 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-[100px]"></div>
+<div class="absolute bottom-1/4 -left-20 w-64 h-64 bg-tertiary/5 rounded-full blur-[80px]"></div>
+<!-- Map Visualization Shell -->
+<div class="relative w-full aspect-square max-w-sm flex items-center justify-center">
+<!-- Mock India SVG / Illustration placeholder -->
+<div class="relative w-full h-full opacity-40 grayscale contrast-125 mix-blend-lighten">
+<img alt="India Map Outline" class="w-full h-full object-contain" data-alt="Technical tactical map outline of India in dark blue neon style" data-location="India" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATsiAExlCC_M36OI5Upd4HSnnSRL8PZDj-xFNU_iMWTowoXsGPyoF9mIbPY6IY1-AYHWh1OWmkPQGtZcMABHZUm9uPPNbB6HTzhC0zEir4d_cfFuX_JdGewEPj3Hj2dvDLqir5F7dyrEQk-9doudACKLI_UFH9XsCBGvMSoVy2sM5arUzkhBQoA48LUkKgl-0R8JwPl-pRAX6I7YFk7vtfKj1vGKJpu6NxPKO11KZQv0pr3GynqcPOdygr1iy9q9m2XqAEwoMru94"/>
+</div>
+<!-- Pulse Points for Selected Districts -->
+<!-- Wayanad -->
+<div class="absolute top-[72%] left-[30%] w-4 h-4">
+<div class="absolute inset-0 bg-primary rounded-full map-pulse"></div>
+<div class="absolute inset-0 bg-primary rounded-full animate-ping opacity-75"></div>
+<div class="absolute -top-8 -left-8 whitespace-nowrap bg-surface-container-highest/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold text-primary border border-primary/20">WAYANAD</div>
+</div>
+<!-- Pune -->
+<div class="absolute top-[62%] left-[24%] w-4 h-4">
+<div class="absolute inset-0 bg-primary rounded-full map-pulse"></div>
+<div class="absolute inset-0 bg-primary rounded-full animate-ping opacity-75"></div>
+<div class="absolute -top-8 -left-4 whitespace-nowrap bg-surface-container-highest/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold text-primary border border-primary/20">PUNE</div>
+</div>
+<!-- Chennai -->
+<div class="absolute top-[78%] left-[38%] w-4 h-4">
+<div class="absolute inset-0 bg-primary rounded-full map-pulse"></div>
+<div class="absolute inset-0 bg-primary rounded-full animate-ping opacity-75"></div>
+<div class="absolute -top-8 -left-4 whitespace-nowrap bg-surface-container-highest/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold text-primary border border-primary/20">CHENNAI</div>
+</div>
+<!-- Scanning Line Visual -->
+<div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/30 to-transparent top-scan-animation"></div>
+</div>
+<!-- HUD Info Overlays -->
+<div class="absolute top-8 right-8 text-right">
+<div class="text-[10px] font-bold text-primary tracking-widest mb-1">SYSTEM STATUS</div>
+<div class="flex items-center justify-end gap-2">
+<span class="w-1.5 h-1.5 bg-tertiary rounded-full shadow-[0_0_5px_rgba(104,219,174,0.8)]"></span>
+<span class="text-[12px] text-on-surface-variant font-mono">LINK_ESTABLISHED_V2</span>
+</div>
+</div>
+<div class="absolute bottom-8 left-8">
+<div class="text-[10px] font-bold text-outline tracking-widest mb-1">DATA NODES</div>
+<div class="text-[14px] text-on-surface font-headline">3 ACTIVE REGIONS</div>
+</div>
+</div>
+</main>
+<!-- Footer Help -->
+<footer class="mt-8 flex items-center gap-6 opacity-40 hover:opacity-100 transition-opacity">
+<a class="text-xs text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]" data-icon="help_outline">help_outline</span>
+            Need help?
+        </a>
+<a class="text-xs text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-xs text-on-surface-variant hover:text-primary transition-colors" href="#">Technical Support</a>
+</footer>
+</body></html>

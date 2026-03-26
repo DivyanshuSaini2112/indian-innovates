@@ -1,0 +1,50 @@
+import { NextResponse } from "next/server";
+import { fetchMultipleDistricts, generateAlertsFromWeather, DEFAULT_DISTRICTS } from "@/lib/api";
+
+export const dynamic = "force-dynamic";
+
+export async function GET() {
+  // Get weather for key districts to derive alerts
+  const districts = await fetchMultipleDistricts(DEFAULT_DISTRICTS);
+  const weatherAlerts = generateAlertsFromWeather(districts);
+
+  // Hard-coded authoritative alerts (simulating IMD/NDMA feed)
+  const imdAlerts = [
+    {
+      id: "imd-001",
+      severity: "High" as const,
+      title: "Orange Alert — Heavy Rainfall Warning",
+      body: "IMD issues orange alert for coastal Kerala districts. Extremely heavy rainfall (>20cm) expected in the next 24 hours.",
+      source: "IMD" as const,
+      district: "Kottayam",
+      state: "Kerala",
+      timestamp: new Date(Date.now() - 30 * 60000).toISOString(),
+      read: false,
+    },
+    {
+      id: "cwc-001",
+      severity: "High" as const,
+      title: "River Level Warning — Ganga at Patna",
+      body: "CWC reports Ganga at Digha Ghat crossing caution level. Rate of rise: 3cm/hr. Low-lying areas advised to remain vigilant.",
+      source: "CWC" as const,
+      district: "Patna",
+      state: "Bihar",
+      timestamp: new Date(Date.now() - 90 * 60000).toISOString(),
+      read: false,
+    },
+    {
+      id: "ndma-001",
+      severity: "Medium" as const,
+      title: "Flood Watch — Brahmaputra Basin",
+      body: "NDMA monitoring Brahmaputra river levels in Assam. Pre-emptive advisory for riverbank communities.",
+      source: "NDMA" as const,
+      district: "Guwahati",
+      state: "Assam",
+      timestamp: new Date(Date.now() - 3 * 3600000).toISOString(),
+      read: true,
+    },
+  ];
+
+  const allAlerts = [...weatherAlerts, ...imdAlerts];
+  return NextResponse.json({ alerts: allAlerts });
+}

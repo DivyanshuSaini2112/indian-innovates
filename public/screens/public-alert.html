@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FloodSense India | Public Alert</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#d8e3f6",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#d8e3f6",
+                        "surface-variant": "#2b3544",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "surface-container-lowest": "#040f1c",
+                        "primary-container": "#1a6fd4",
+                        "tertiary": "#ffb59b",
+                        "inverse-on-surface": "#26313f",
+                        "tertiary-container": "#c64508",
+                        "surface-container-low": "#111c2a",
+                        "primary-fixed-dim": "#aac7ff",
+                        "on-tertiary": "#5b1a00",
+                        "on-error": "#690005",
+                        "surface-tint": "#aac7ff",
+                        "surface-container-highest": "#2b3544",
+                        "on-secondary-container": "#003121",
+                        "tertiary-fixed": "#ffdbcf",
+                        "primary": "#aac7ff",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "on-primary-container": "#f4f5ff",
+                        "inverse-primary": "#005db9",
+                        "outline-variant": "#414753",
+                        "on-secondary-fixed-variant": "#00513a",
+                        "surface": "#091421",
+                        "on-surface-variant": "#c1c6d5",
+                        "on-secondary-fixed": "#002115",
+                        "on-primary-fixed-variant": "#00458d",
+                        "secondary-fixed": "#86f8c9",
+                        "surface-container-high": "#202b39",
+                        "surface-container": "#16202e",
+                        "on-tertiary-fixed": "#380d00",
+                        "secondary-fixed-dim": "#68dbae",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#fff3f0",
+                        "surface-dim": "#091421",
+                        "on-primary": "#002f64",
+                        "error": "#ffb4ab",
+                        "secondary": "#68dbae",
+                        "secondary-container": "#26a37a",
+                        "primary-fixed": "#d6e3ff",
+                        "on-secondary": "#003827",
+                        "background": "#091421",
+                        "inverse-surface": "#d8e3f6",
+                        "outline": "#8b919e",
+                        "surface-bright": "#2f3a49",
+                        "on-primary-fixed": "#001b3e"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #020B18;
+            color: #d8e3f6;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col">
+<style>
+  #fs-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+    background: rgba(2,11,24,0.92); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 24px; font-family: 'Inter', sans-serif;
+  }
+  #fs-nav a { color: rgba(240,244,255,0.65); text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+  #fs-nav a:hover { color: #F0F4FF; background: rgba(255,255,255,0.06); }
+  #fs-nav .logo { font-weight: 700; letter-spacing: 0.15em; font-size: 14px; color: #F0F4FF; }
+  #fs-nav .logo span { color: #1A6FD4; }
+  body { padding-top: 52px !important; }
+</style>
+<div id="fs-nav">
+  <a class="logo" href="/screens/splash.html">FLOOD<span>SENSE</span></a>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/dashboard.html">Dashboard</a>
+    <a href="/screens/map.html">Live Map</a>
+    <a href="/screens/my-districts.html">My Districts</a>
+    <a href="/screens/alerts.html">Alerts</a>
+    <a href="/screens/reports.html">Reports</a>
+  </div>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/profile.html">Profile</a>
+    <a href="/screens/settings.html">Settings</a>
+    <a href="/screens/login.html" style="border:1px solid rgba(26,111,212,0.4);color:#1A6FD4;">Sign In</a>
+  </div>
+</div>
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#091421]/80 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#aac7ff]" data-icon="tsunami">tsunami</span>
+<span class="font-['Space_Grotesk'] font-bold text-blue-600 dark:text-[#aac7ff] text-xl tracking-tight">FloodSense India</span>
+</div>
+<div class="flex items-center">
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-widest text-[#aac7ff] bg-[#1A6FD4]/20 px-3 py-1 rounded-full border border-[#1A6FD4]/30">Public Alert</span>
+</div>
+</nav>
+<main class="flex-grow pt-24 pb-32 px-6 max-w-4xl mx-auto w-full">
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter text-on-surface mb-6 leading-none">
+                Kottayam, Kerala
+            </h1>
+<div class="inline-flex items-center gap-2 px-6 py-2 bg-[#C0392B] rounded-full shadow-[0_0_20px_rgba(192,57,43,0.4)]">
+<span class="material-symbols-outlined text-white text-sm" data-icon="warning" data-weight="fill" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="font-headline font-bold text-white tracking-widest text-lg">CRITICAL</span>
+</div>
+</header>
+<!-- Summary Section -->
+<section class="mb-10">
+<p class="font-body text-xl md:text-2xl text-on-surface-variant leading-relaxed font-light">
+                Heavy rainfall has caused river levels to rise rapidly. <span class="text-white font-medium underline decoration-error/40">Evacuation recommended</span> in low-lying areas.
+            </p>
+</section>
+<!-- Stats Block (Glass Card) -->
+<section class="glass-card rounded-xl p-8 mb-10 grid grid-cols-1 md:grid-cols-2 gap-8 relative overflow-hidden">
+<!-- Subtle background glow -->
+<div class="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 blur-[80px]"></div>
+<div class="flex flex-col gap-2">
+<span class="font-label text-xs uppercase tracking-[0.2em] text-outline">Rainfall</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-4xl font-bold text-on-surface">210mm</span>
+<span class="font-body text-sm text-outline">in 24hrs</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
+<div class="w-[85%] h-full bg-error"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label text-xs uppercase tracking-[0.2em] text-outline">River Level</span>
+<div class="flex flex-col">
+<span class="font-headline text-2xl font-semibold text-on-surface">Meenachil River</span>
+<span class="font-body text-lg text-error font-medium">2.1m above danger mark</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
+<div class="w-[95%] h-full bg-error"></div>
+</div>
+</div>
+</section>
+<!-- Emergency Contacts -->
+<section class="mb-12">
+<h3 class="font-headline text-sm uppercase tracking-[0.3em] text-outline mb-6">Emergency Contacts</h3>
+<div class="space-y-3">
+<a class="flex items-center justify-between p-4 rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors group" href="tel:1078">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="emergency_share">emergency_share</span>
+<span class="font-body font-medium text-on-surface">National Disaster Helpline</span>
+</div>
+<span class="font-headline font-bold text-primary tracking-tight">1078</span>
+</a>
+<a class="flex items-center justify-between p-4 rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors group" href="tel:100">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="local_police">local_police</span>
+<span class="font-body font-medium text-on-surface">Local Police</span>
+</div>
+<span class="font-headline font-bold text-primary tracking-tight">100</span>
+</a>
+<a class="flex items-center justify-between p-4 rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors group" href="tel:102">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="medical_services">medical_services</span>
+<span class="font-body font-medium text-on-surface">Ambulance</span>
+</div>
+<span class="font-headline font-bold text-primary tracking-tight">102</span>
+</a>
+</div>
+</section>
+<!-- Bottom CTA -->
+<section class="mb-8">
+<button class="w-full py-5 bg-primary-container text-on-primary-container font-headline font-bold text-lg rounded-xl shadow-lg shadow-primary-container/20 hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+                Get full details and real-time alerts â€” Sign up free
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</section>
+<!-- Share Section -->
+<section class="flex flex-col items-center gap-6">
+<span class="font-label text-[10px] uppercase tracking-[0.4em] text-outline/60">Share Alert</span>
+<div class="flex gap-6">
+<button aria-label="Share on WhatsApp" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-white/10 transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="chat">chat</span>
+</button>
+<button aria-label="Share on Twitter" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-white/10 transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="grid_view">grid_view</span>
+</button>
+<button aria-label="Copy Link" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-white/10 transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="link">link</span>
+</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Filtered based on destination rule: Public Alert is a focused transactional/urgent view, but shown for demo as per schema) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#040f1c]/90 backdrop-blur-2xl rounded-t-2xl border-t border-white/10 shadow-[0_-4px_24px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-slate-500 py-2 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="map">map</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-widest">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#1A6FD4]/20 text-[#aac7ff] rounded-xl px-6 py-2 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="notifications_active" data-weight="fill" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-widest">Alerts</span>
+</a>
+</nav>
+<!-- Background Map Visual (Faded) -->
+<div class="fixed inset-0 -z-10 opacity-20 grayscale pointer-events-none overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="abstract dark topographical map of a river delta with glowing blue veins representing water flow and flood risk zones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlz75RwD63YFzDdjZGblfNHuqmfQjKcp9vz_nO6cZfe3QLfQBg4jeyr3rAljYeRyecfOdth1L4PrlaBMekX0MuruNeVg2PZEeCTAFGfumlFbaSLOUKfr8XM9oJDFxh4fXPaIoEgj0EayRfPDkjYilutB0Pq2ybJ61QSU0ihgF0q06f_7RW5xd68dlyxsUojHs11iyrt-DOyQ-X314QI5ALNVjdlWLq9-18uqdAyeWQAmYErqKwppKCRTjmDLxugxdOpJ0kJOib--w"/>
+<div class="absolute inset-0 bg-gradient-to-b from-[#020B18] via-transparent to-[#020B18]"></div>
+</div>
+</body></html>

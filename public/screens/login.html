@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | FloodSense India</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#d6e3ff",
+              "on-tertiary-fixed": "#321200",
+              "surface-container-lowest": "#040f1c",
+              "on-secondary": "#183055",
+              "error-container": "#93000a",
+              "on-secondary-fixed-variant": "#30476d",
+              "on-tertiary": "#532200",
+              "background": "#020B18",
+              "secondary-fixed-dim": "#b0c7f4",
+              "secondary": "#b0c7f4",
+              "primary-fixed-dim": "#aac7ff",
+              "outline": "#8b919e",
+              "on-secondary-fixed": "#001b3e",
+              "surface-container-highest": "#2b3544",
+              "on-secondary-container": "#9fb6e2",
+              "inverse-on-surface": "#26313f",
+              "tertiary": "#ffb68d",
+              "tertiary-container": "#b75400",
+              "surface-variant": "#2b3544",
+              "secondary-container": "#30476d",
+              "on-tertiary-fixed-variant": "#763400",
+              "on-error-container": "#ffdad6",
+              "surface": "#091421",
+              "primary-fixed": "#d6e3ff",
+              "on-surface": "#d8e3f6",
+              "surface-bright": "#2f3a49",
+              "on-tertiary-container": "#fff4f0",
+              "on-primary-fixed": "#001b3e",
+              "primary-container": "#1a6fd4",
+              "on-primary-fixed-variant": "#00458d",
+              "surface-tint": "#aac7ff",
+              "on-primary": "#002f64",
+              "surface-container": "#16202e",
+              "surface-container-low": "#111c2a",
+              "error": "#ffb4ab",
+              "inverse-primary": "#005db9",
+              "surface-dim": "#091421",
+              "on-surface-variant": "#c1c6d5",
+              "on-primary-container": "#f4f5ff",
+              "on-error": "#690005",
+              "inverse-surface": "#d8e3f6",
+              "tertiary-fixed-dim": "#ffb68d",
+              "primary": "#aac7ff",
+              "outline-variant": "#414753",
+              "on-background": "#d8e3f6",
+              "surface-container-high": "#202b39",
+              "tertiary-fixed": "#ffdbc9"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #020B18; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .bg-mesh {
+            background-image: radial-gradient(circle at 20% 30%, rgba(26, 111, 212, 0.15) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 70%, rgba(183, 84, 0, 0.1) 0%, transparent 50%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<style>
+  #fs-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+    background: rgba(2,11,24,0.92); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 24px; font-family: 'Inter', sans-serif;
+  }
+  #fs-nav a { color: rgba(240,244,255,0.65); text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+  #fs-nav a:hover { color: #F0F4FF; background: rgba(255,255,255,0.06); }
+  #fs-nav .logo { font-weight: 700; letter-spacing: 0.15em; font-size: 14px; color: #F0F4FF; }
+  #fs-nav .logo span { color: #1A6FD4; }
+  body { padding-top: 52px !important; }
+</style>
+<div id="fs-nav">
+  <a class="logo" href="/screens/splash.html">FLOOD<span>SENSE</span></a>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/dashboard.html">Dashboard</a>
+    <a href="/screens/map.html">Live Map</a>
+    <a href="/screens/my-districts.html">My Districts</a>
+    <a href="/screens/alerts.html">Alerts</a>
+    <a href="/screens/reports.html">Reports</a>
+  </div>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/profile.html">Profile</a>
+    <a href="/screens/settings.html">Settings</a>
+    <a href="/screens/login.html" style="border:1px solid rgba(26,111,212,0.4);color:#1A6FD4;">Sign In</a>
+  </div>
+</div>
+<main class="flex-grow flex flex-col md:flex-row w-full overflow-hidden">
+<!-- Visual Panel -->
+<section class="relative w-full md:w-1/2 lg:w-[60%] p-6 md:p-12 flex flex-col justify-between bg-mesh overflow-hidden min-h-[400px] md:min-h-screen">
+<!-- Decorative Background Map Element -->
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<img class="w-full h-full object-cover mix-blend-overlay" data-alt="technical topological map of river basins in India with digital data overlays and blue depth indicators" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMEEHK66YpKv87Z5fSocN99MwDscyMeaVSOPz6DXjt9th7adCzmLPkZlIaZTxRtIBufkuvJZeeL6KykPJXVeEqVbp53SM8Mza-eKiMSu-KAykmcrs6ZRMDcuw5nXHdqRhZXQRQ9jWIHx8Gb6L6p88WhIqu_ipHQH8MWAc5GoVPmT96CDWGe84sB_D61myGSr_0bD3BOwd2IJl1QNNvG73nCbufOj5gycZjq8amnkXoPKOD7TgEyDrilGeL-7pSW2WKN5DHcN2kpfQ"/>
+</div>
+<!-- Header Logic (JSON Mapping) -->
+<div class="relative z-10 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined text-2xl">water_damage</span>
+</div>
+<div>
+<h1 class="font-headline font-bold text-2xl tracking-tight text-white">FloodSense India</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Real-Time Flood Intelligence</p>
+</div>
+</div>
+<!-- Rotating Stat / Hero Content -->
+<div class="relative z-10 my-auto max-w-lg">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary-container/20 border border-tertiary/20 text-tertiary text-xs font-medium mb-6">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+                    Live Telemetry Active
+                </div>
+<h2 class="font-headline text-5xl md:text-7xl font-bold leading-tight mb-6">
+                    4 rivers <span class="text-tertiary">above danger mark</span> today
+                </h2>
+<div class="flex gap-4 items-center">
+<div class="h-1 w-24 bg-gradient-to-r from-primary to-transparent"></div>
+<p class="text-on-surface-variant font-medium">Predictive analytics for early warning.</p>
+</div>
+</div>
+<!-- Bottom Trust Line -->
+<div class="relative z-10 glass-panel p-4 rounded-xl flex items-center gap-4 max-w-md">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-[#020B18] bg-surface-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="circular emblem of a national disaster response agency in blue and gold" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWVr7T7rWDRcd5qBZcds5wp50hE7EovwF2ljXkftJhpgGc5w2VQ9nCk1u4c8dvk37w_DD4K7ASUFYJhcT6YrhyL3VjBaEha_c2a1CcTREflmQVIK_N0llIPGylFfITiwH9eme-c8CGYY_0wftFRdk4FR4imG4xwf8RUghSyng-opyLZPdStI4UU7skjQS_C8jnlBp_1BmtXrpntYGdNBvDsdPDsU345hjaShyAKviepAPMn1dZ6LP0VVEFNky3vD5_zsYooxS_854"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-[#020B18] bg-surface-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="minimalist government seal with Ashoka pillar symbol" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDARs6EavC07ojEsV745hIObEATNEGrR3j5ApI_nAiHEd98hzAQ-h_XZ85HoOvWyGXOCln9IQ_O1LGEoJpvSgynNnmvTp1v43fJX0yIHrIyVMtWpAuY6f45Ok8HAzaADMUXU_4j2L3C0U_h_tVdtiovdjICtD2hH2XtqyYhcKwkN2psMtEnJrQofYHJeb2gi6DP17Nink7Ck5uGQFHEMbphfrfi8vX_cPPKQ9ObfLmNQDmkC602yfon7NSpYVP8poB4qco55z1L4T0"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-[#020B18] bg-surface-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="logo of a hydro-meteorological department" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpZHizqjLh8UoXt_FMMotBAGKOPAZqRHsT1YaJoB3vYYW1e7M2M_BRJu-TyMl7qEJK3o5Dz8aAt7Tjpuh40IhGprmHk653oLiAZ_3V6bMT-0hZDYHFlRHGtSNxXqybddR2faJmv1jfD94zneNHFUXIoQvpMHto1pA86nT3od4nDcOdR29bjiuzyGpKO60hZ2Z9w3-N7nQJZQeaSdOvRaZRx3TlrQvd1XN3v8kDqfWjKIo3Au6OCM9XNsewPc_IcDtBFiPljLLx0UY"/>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant/80 font-medium">
+                    Trusted by disaster management teams across <span class="text-white">12 states.</span>
+</p>
+</div>
+</section>
+<!-- Login Form Panel -->
+<section class="w-full md:w-1/2 lg:w-[40%] bg-[#020B18] p-8 md:p-16 flex flex-col justify-center">
+<div class="max-w-md w-full mx-auto">
+<div class="mb-10">
+<h3 class="font-headline text-3xl font-bold text-white mb-2">Welcome back.</h3>
+<p class="text-on-surface-variant">Enter your credentials to access precision data.</p>
+</div>
+<form class="space-y-6">
+<div class="relative group">
+<input class="peer w-full bg-surface-container-highest/30 border-none rounded-lg px-4 pt-6 pb-2 text-white placeholder-transparent focus:ring-2 focus:ring-primary-container transition-all" id="email" placeholder="Email address" type="email"/>
+<label class="absolute left-4 top-2 text-[10px] uppercase tracking-wider text-on-surface-variant font-semibold transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:font-normal peer-focus:top-2 peer-focus:text-[10px] peer-focus:font-semibold peer-focus:text-primary" for="email">Email address</label>
+</div>
+<div class="relative group">
+<input class="peer w-full bg-surface-container-highest/30 border-none rounded-lg px-4 pt-6 pb-2 text-white placeholder-transparent focus:ring-2 focus:ring-primary-container transition-all" id="password" placeholder="Password" type="password"/>
+<label class="absolute left-4 top-2 text-[10px] uppercase tracking-wider text-on-surface-variant font-semibold transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:font-normal peer-focus:top-2 peer-focus:text-[10px] peer-focus:font-semibold peer-focus:text-primary" for="password">Password</label>
+<div class="flex justify-end mt-2">
+<a class="text-xs font-medium text-primary hover:text-white transition-colors" href="#">Forgot password?</a>
+</div>
+</div>
+<button class="w-full py-4 rounded-full bg-gradient-to-r from-[#1A6FD4] to-[#3B82F6] text-white font-bold tracking-wide shadow-[0_0_20px_rgba(26,111,212,0.3)] hover:shadow-[0_0_30px_rgba(26,111,212,0.5)] active:scale-[0.98] transition-all flex items-center justify-center gap-2" type="submit">
+                        Sign In
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</form>
+<div class="relative my-10 flex items-center">
+<div class="flex-grow border-t border-white/5"></div>
+<span class="flex-shrink mx-4 text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 font-bold">or continue with</span>
+<div class="flex-grow border-t border-white/5"></div>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<button class="glass-panel w-full py-3 rounded-full flex items-center justify-center gap-3 hover:bg-white/10 transition-all active:scale-[0.98]">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81.38z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span class="text-sm font-semibold text-white">Google Authority Access</span>
+</button>
+</div>
+<div class="mt-12 text-center">
+<p class="text-on-surface-variant text-sm">
+                        New here? <a class="text-primary font-bold hover:underline decoration-2 underline-offset-4" href="#">Create account</a>
+</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Logic (JSON Mapping) -->
+<footer class="w-full py-8 bg-[#020B18] border-t border-white/5 flex flex-col md:flex-row justify-between items-center px-8 gap-4 mt-auto">
+<p class="font-body text-xs tracking-wide uppercase opacity-60 text-[#aac7ff]">
+            Â© 2024 FloodSense India. Precision Intelligence.
+        </p>
+<div class="flex gap-6">
+<a class="font-body text-xs tracking-wide uppercase opacity-60 text-[#aac7ff] hover:text-white transition-opacity" href="#">Privacy Policy</a>
+<a class="font-body text-xs tracking-wide uppercase opacity-60 text-[#aac7ff] hover:text-white transition-opacity" href="#">Terms of Service</a>
+<a class="font-body text-xs tracking-wide uppercase opacity-60 text-[#aac7ff] hover:text-white transition-opacity" href="#">Security</a>
+</div>
+</footer>
+</body></html>

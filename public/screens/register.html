@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Register | FloodSense India</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary": "#b0c7f4",
+              "surface": "#091421",
+              "error": "#ffb4ab",
+              "inverse-surface": "#d8e3f6",
+              "on-error": "#690005",
+              "surface-container-low": "#111c2a",
+              "outline-variant": "#414753",
+              "background": "#091421",
+              "on-secondary": "#183055",
+              "inverse-on-surface": "#26313f",
+              "secondary-fixed-dim": "#b0c7f4",
+              "on-secondary-fixed-variant": "#30476d",
+              "primary-container": "#1a6fd4",
+              "surface-container-lowest": "#040f1c",
+              "on-tertiary": "#532200",
+              "on-tertiary-fixed-variant": "#763400",
+              "tertiary": "#ffb68d",
+              "surface-dim": "#091421",
+              "on-primary-container": "#f4f5ff",
+              "tertiary-fixed": "#ffdbc9",
+              "primary": "#aac7ff",
+              "primary-fixed": "#d6e3ff",
+              "on-primary-fixed": "#001b3e",
+              "on-primary-fixed-variant": "#00458d",
+              "surface-container-high": "#202b39",
+              "surface-container": "#16202e",
+              "on-tertiary-container": "#fff4f0",
+              "tertiary-container": "#b75400",
+              "primary-fixed-dim": "#aac7ff",
+              "surface-variant": "#2b3544",
+              "inverse-primary": "#005db9",
+              "surface-tint": "#aac7ff",
+              "on-tertiary-fixed": "#321200",
+              "surface-bright": "#2f3a49",
+              "error-container": "#93000a",
+              "on-secondary-container": "#9fb6e2",
+              "on-primary": "#002f64",
+              "secondary-container": "#30476d",
+              "on-secondary-fixed": "#001b3e",
+              "on-background": "#d8e3f6",
+              "outline": "#8b919e",
+              "on-surface-variant": "#c1c6d5",
+              "on-surface": "#d8e3f6",
+              "on-error-container": "#ffdad6",
+              "tertiary-fixed-dim": "#ffb68d",
+              "secondary-fixed": "#d6e3ff",
+              "surface-container-highest": "#2b3544"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #020B18; color: #F0F4FF; font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .text-muted { color: #6B7FA3; }
+        .floating-label-input:focus-within label,
+        .floating-label-input input:not(:placeholder-shown) + label {
+            transform: translateY(-1.5rem) scale(0.85);
+            color: #aac7ff;
+        }
+        .strength-bar {
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+        .strength-fill {
+            height: 100%;
+            width: 65%; /* Simulated state */
+            background: linear-gradient(90deg, #1A6FD4, #aac7ff);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex items-stretch selection:bg-primary-container selection:text-on-primary-container">
+<style>
+  #fs-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+    background: rgba(2,11,24,0.92); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 24px; font-family: 'Inter', sans-serif;
+  }
+  #fs-nav a { color: rgba(240,244,255,0.65); text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+  #fs-nav a:hover { color: #F0F4FF; background: rgba(255,255,255,0.06); }
+  #fs-nav .logo { font-weight: 700; letter-spacing: 0.15em; font-size: 14px; color: #F0F4FF; }
+  #fs-nav .logo span { color: #1A6FD4; }
+  body { padding-top: 52px !important; }
+</style>
+<div id="fs-nav">
+  <a class="logo" href="/screens/splash.html">FLOOD<span>SENSE</span></a>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/dashboard.html">Dashboard</a>
+    <a href="/screens/map.html">Live Map</a>
+    <a href="/screens/my-districts.html">My Districts</a>
+    <a href="/screens/alerts.html">Alerts</a>
+    <a href="/screens/reports.html">Reports</a>
+  </div>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/profile.html">Profile</a>
+    <a href="/screens/settings.html">Settings</a>
+    <a href="/screens/login.html" style="border:1px solid rgba(26,111,212,0.4);color:#1A6FD4;">Sign In</a>
+  </div>
+</div>
+<!-- Left Column: Visual & Branding -->
+<section class="hidden lg:flex w-1/2 relative overflow-hidden bg-[#020B18] flex-col justify-between p-16">
+<!-- Background Scene Emulation -->
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-br from-[#1A6FD4]/20 to-transparent mix-blend-overlay"></div>
+<img alt="Aerial view of heavy rainfall over tropical landscape with blue atmospheric lighting" class="w-full h-full object-cover opacity-30 grayscale" data-alt="cinematic aerial view of heavy rain over a dark landscape with glowing blue water channels and mist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa2RvW2uYKsGAKB6Z4qnPfRIojjP0DSOOPHntz8icrWZECvU2Dj5XtuQSyxhM-9W_52Ucc3gUpNaftQ5YDSzo-GGGeW4_3I3RJSWvr87m_rGun7ke9nqocGW_LU6RW0OL5eKcPflTTTHwRJkr6vVayVJlAOusf413Pr_uGXgyKAThhHJzxglPlnG6zF8Y_Qlq9aTxOQqw7P4F6ej_BqL7mFD2zQjEDx2XcsIW9aYG2xIQ7PuSaRu7vztZFeAoLCRv1muqLyH_H9oM"/>
+</div>
+<!-- Top-left Branding -->
+<div class="relative z-10 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</div>
+<div>
+<h1 class="font-headline font-bold text-2xl tracking-tight leading-none">FloodSense India</h1>
+<p class="text-xs text-muted tracking-widest uppercase mt-1">Real-Time Flood Intelligence</p>
+</div>
+</div>
+<!-- Center Large Stat -->
+<div class="relative z-10 max-w-md">
+<div class="glass-panel p-8 rounded-xl">
+<div class="flex items-center gap-2 mb-4">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="text-xs font-bold uppercase tracking-widest text-error">Live Alert</span>
+</div>
+<h2 class="font-headline text-5xl font-bold leading-tight mb-4">
+                    Last 24hrs: <span class="text-primary">142mm</span> rainfall recorded in Kerala
+                </h2>
+<p class="text-muted text-lg font-light leading-relaxed">
+                    Precision monitoring across 4,200 sensor nodes providing hyper-local risk assessment.
+                </p>
+</div>
+</div>
+<!-- Bottom Trust Line -->
+<div class="relative z-10 flex items-center gap-4 text-muted">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-[#020B18] bg-surface-container flex items-center justify-center text-[10px] font-bold">DR</div>
+<div class="w-8 h-8 rounded-full border-2 border-[#020B18] bg-surface-container flex items-center justify-center text-[10px] font-bold">ND</div>
+<div class="w-8 h-8 rounded-full border-2 border-[#020B18] bg-surface-container flex items-center justify-center text-[10px] font-bold">SD</div>
+</div>
+<p class="text-sm font-medium">Trusted by disaster management teams across 12 states.</p>
+</div>
+</section>
+<!-- Right Column: Registration Form -->
+<main class="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-24 bg-[#020B18]">
+<div class="w-full max-w-md space-y-10">
+<!-- Header -->
+<header>
+<h2 class="font-headline text-4xl font-bold mb-2">Create your account.</h2>
+<p class="text-muted">Access precision intelligence for flood risk management.</p>
+</header>
+<form class="space-y-6">
+<!-- Role Selector -->
+<div class="space-y-3">
+<label class="text-xs font-bold uppercase tracking-widest text-muted">Identify as</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-5 py-2 rounded-full text-xs font-semibold bg-primary text-on-primary transition-all" type="button">Citizen</button>
+<button class="px-5 py-2 rounded-full text-xs font-semibold bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all" type="button">Researcher</button>
+<button class="px-5 py-2 rounded-full text-xs font-semibold bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all" type="button">Gov</button>
+<button class="px-5 py-2 rounded-full text-xs font-semibold bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all" type="button">NGO Worker</button>
+</div>
+</div>
+<!-- Input Groups -->
+<div class="space-y-5">
+<!-- Full Name -->
+<div class="relative floating-label-input group">
+<input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-4 text-on-surface focus:ring-2 focus:ring-primary-container transition-all" id="full_name" placeholder=" " type="text"/>
+<label class="absolute left-4 top-4 text-muted pointer-events-none transition-all origin-left" for="full_name">Full Name</label>
+</div>
+<!-- Email -->
+<div class="relative floating-label-input group">
+<input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-4 text-on-surface focus:ring-2 focus:ring-primary-container transition-all" id="email" placeholder=" " type="email"/>
+<label class="absolute left-4 top-4 text-muted pointer-events-none transition-all origin-left" for="email">Email Address</label>
+</div>
+<!-- Password -->
+<div class="space-y-2">
+<div class="relative floating-label-input group">
+<input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-4 text-on-surface focus:ring-2 focus:ring-primary-container transition-all" id="password" placeholder=" " type="password"/>
+<label class="absolute left-4 top-4 text-muted pointer-events-none transition-all origin-left" for="password">Password</label>
+</div>
+<div class="px-1 space-y-1">
+<div class="strength-bar"><div class="strength-fill"></div></div>
+<div class="flex justify-between items-center text-[10px] uppercase font-bold tracking-widest">
+<span class="text-primary">Strength: Medium</span>
+<span class="text-muted">Use symbols &amp; numbers</span>
+</div>
+</div>
+</div>
+<!-- Confirm Password -->
+<div class="relative floating-label-input group">
+<input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-4 text-on-surface focus:ring-2 focus:ring-primary-container transition-all" id="confirm_password" placeholder=" " type="password"/>
+<label class="absolute left-4 top-4 text-muted pointer-events-none transition-all origin-left" for="confirm_password">Confirm Password</label>
+</div>
+<!-- State Selector -->
+<div class="space-y-1">
+<label class="text-[10px] font-bold uppercase tracking-widest text-muted px-1" for="state">Primary Region</label>
+<select class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-4 text-on-surface focus:ring-2 focus:ring-primary-container transition-all appearance-none cursor-pointer" id="state">
+<option>Select State</option>
+<option>Kerala</option>
+<option>Assam</option>
+<option>Bihar</option>
+<option>Maharashtra</option>
+<option>Tamil Nadu</option>
+<option>Other</option>
+</select>
+</div>
+</div>
+<!-- Primary CTA -->
+<button class="w-full bg-gradient-to-r from-[#1A6FD4] to-[#4589FF] hover:shadow-[0_0_20px_rgba(26,111,212,0.4)] text-white font-bold py-4 rounded-lg transition-all active:scale-95 flex items-center justify-center gap-2" type="submit">
+                    Create Account
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<!-- Divider -->
+<div class="relative py-4">
+<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/10"></div></div>
+<div class="relative flex justify-center text-xs uppercase tracking-widest">
+<span class="bg-[#020B18] px-4 text-muted">or continue with</span>
+</div>
+</div>
+<!-- Social Auth -->
+<button class="w-full glass-panel hover:bg-white/10 py-4 rounded-lg flex items-center justify-center gap-3 transition-all" type="button">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span class="font-semibold text-sm">Google Intelligence ID</span>
+</button>
+<!-- Footer Link -->
+<p class="text-center text-sm text-muted">
+                    Already have an account? 
+                    <a class="text-primary font-bold hover:underline decoration-2 underline-offset-4" href="#">Sign in</a>
+</p>
+</form>
+</div>
+</main>
+<!-- Footer Component (Shared) -->
+<footer class="fixed bottom-0 right-0 w-full lg:w-1/2 bg-[#020B18] py-6 px-12 flex flex-col md:flex-row justify-between items-center gap-4 z-50">
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest text-[#F0F4FF]/40">Â© 2024 FloodSense India. Precision Intelligence.</span>
+<div class="flex gap-6">
+<a class="font-['Inter'] text-[10px] uppercase tracking-widest text-[#F0F4FF]/40 hover:text-[#1A6FD4] transition-all" href="#">Privacy Protocol</a>
+<a class="font-['Inter'] text-[10px] uppercase tracking-widest text-[#F0F4FF]/40 hover:text-[#1A6FD4] transition-all" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-[10px] uppercase tracking-widest text-[#F0F4FF]/40 hover:text-[#1A6FD4] transition-all" href="#">API Access</a>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>404 - Page Washed Away | FLOOD_SENTINEL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed": "#031b3a",
+              "secondary-fixed-dim": "#b3c7ef",
+              "primary-container": "#1a6fd4",
+              "surface-container-low": "#111c2a",
+              "error": "#ffb4ab",
+              "inverse-on-surface": "#26313f",
+              "tertiary-fixed-dim": "#3adccc",
+              "surface-dim": "#091421",
+              "on-tertiary-fixed": "#00201d",
+              "outline-variant": "#414753",
+              "outline": "#8b919e",
+              "tertiary-container": "#007f75",
+              "surface-tint": "#aac7ff",
+              "secondary": "#b3c7ef",
+              "on-error-container": "#ffdad6",
+              "surface-variant": "#2b3544",
+              "background": "#091421",
+              "secondary-fixed": "#d6e3ff",
+              "on-primary-fixed": "#001b3e",
+              "on-primary-fixed-variant": "#00458d",
+              "surface-container": "#16202e",
+              "on-secondary-container": "#a1b6dc",
+              "surface-container-high": "#202b39",
+              "inverse-primary": "#005db9",
+              "on-primary": "#002f64",
+              "on-background": "#d8e3f6",
+              "on-tertiary-container": "#d5fff8",
+              "on-secondary-fixed-variant": "#334768",
+              "on-secondary": "#1c3150",
+              "on-tertiary": "#003732",
+              "tertiary": "#3adccc",
+              "on-error": "#690005",
+              "primary-fixed": "#d6e3ff",
+              "on-primary-container": "#f4f5ff",
+              "surface-container-lowest": "#040f1c",
+              "on-surface-variant": "#c1c6d5",
+              "surface": "#091421",
+              "surface-bright": "#2f3a49",
+              "error-container": "#93000a",
+              "on-surface": "#d8e3f6",
+              "secondary-container": "#334768",
+              "tertiary-fixed": "#61f9e9",
+              "on-tertiary-fixed-variant": "#005049",
+              "inverse-surface": "#d8e3f6",
+              "primary-fixed-dim": "#aac7ff",
+              "primary": "#aac7ff",
+              "surface-container-highest": "#2b3544"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #020B18; /* Overriding for specific requested background */
+        }
+        .atmospheric-glow {
+            background: radial-gradient(circle at center, rgba(26, 111, 212, 0.15) 0%, rgba(2, 11, 24, 0) 70%);
+        }
+        .rain-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, #1A6FD4, transparent);
+            position: absolute;
+            opacity: 0.3;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-on-surface selection:bg-primary/30 min-h-screen flex flex-col items-center justify-center overflow-hidden">
+<style>
+  #fs-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+    background: rgba(2,11,24,0.92); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 24px; font-family: 'Inter', sans-serif;
+  }
+  #fs-nav a { color: rgba(240,244,255,0.65); text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+  #fs-nav a:hover { color: #F0F4FF; background: rgba(255,255,255,0.06); }
+  #fs-nav .logo { font-weight: 700; letter-spacing: 0.15em; font-size: 14px; color: #F0F4FF; }
+  #fs-nav .logo span { color: #1A6FD4; }
+  body { padding-top: 52px !important; }
+</style>
+<div id="fs-nav">
+  <a class="logo" href="/screens/splash.html">FLOOD<span>SENSE</span></a>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/dashboard.html">Dashboard</a>
+    <a href="/screens/map.html">Live Map</a>
+    <a href="/screens/my-districts.html">My Districts</a>
+    <a href="/screens/alerts.html">Alerts</a>
+    <a href="/screens/reports.html">Reports</a>
+  </div>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/profile.html">Profile</a>
+    <a href="/screens/settings.html">Settings</a>
+    <a href="/screens/login.html" style="border:1px solid rgba(26,111,212,0.4);color:#1A6FD4;">Sign In</a>
+  </div>
+</div>
+<!-- Top Navigation Anchor (Suppressing active states as this is a 404) -->
+<header class="fixed top-0 w-full z-50 bg-[#020B18]/80 backdrop-blur-xl border-b border-[#1A6FD4]/10 flex items-center justify-between px-6 h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#1A6FD4]" data-icon="security">security</span>
+<span class="font-['Space_Grotesk'] font-bold tracking-tight text-xl text-[#1A6FD4]">FLOOD_SENTINEL</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label text-xs tracking-widest uppercase text-[#6B7FA3] hover:text-white transition-colors" href="#">TERRAIN</a>
+<a class="font-label text-xs tracking-widest uppercase text-[#6B7FA3] hover:text-white transition-colors" href="#">INTEL</a>
+<a class="font-label text-xs tracking-widest uppercase text-[#6B7FA3] hover:text-white transition-colors" href="#">ALERTS</a>
+<a class="font-label text-xs tracking-widest uppercase text-[#6B7FA3] hover:text-white transition-colors" href="#">SYSTEM</a>
+</nav>
+</header>
+<!-- Background Atmospheric Elements -->
+<div class="absolute inset-0 z-0 atmospheric-glow pointer-events-none"></div>
+<!-- Main Content Canvas -->
+<main class="relative z-10 w-full max-w-4xl px-6 flex flex-col items-center text-center">
+<!-- Large Background Indicator -->
+<h1 class="font-headline font-bold text-[12rem] md:text-[20rem] leading-none text-[#6B7FA3]/10 select-none pointer-events-none absolute -top-32 md:-top-48 z-0">
+            404
+        </h1>
+<!-- Visual Intelligence Section: Low-poly Village Concept -->
+<div class="relative w-full h-[320px] md:h-[450px] mb-8 mt-12 flex items-center justify-center">
+<!-- Simulated Low Poly Scene (Using Image Placeholder with Rich Data Alt) -->
+<div class="relative w-full max-w-md aspect-square rounded-xl overflow-hidden bg-surface-container-lowest/50 backdrop-blur-sm border border-outline-variant/10 shadow-2xl">
+<img alt="Minimalist low-poly flooded village" class="w-full h-full object-cover opacity-60 mix-blend-luminosity" data-alt="A stylized 3D low-poly miniature village partially submerged in dark water with small paper-like houses, falling blue rain streaks, and a bright orange life preserver floating prominently in the foreground." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADUKRZwfFDswefz4A9tpqlh0Unu8ILRtSZsVnTROtScqQp82TfPliawV0Co6N8ToAZ_n2qdCMi-XNKWzRikSPBIyDQ2P20KdW5qBzt4iDYKV9xXlNQ0NLNOMDppVHqFVWVBpxkhl8AUrJarURVwawiLQWrhRsOmW_UiJdeFYKVZv5Is3BfFmN3xfTHlPaIP0O75ulKL8nKDMH8FxEvBlwzDm_kqdthQIPtKXMTbiA4O92ylh74chvfrFgPkT3MVeU0-eRPISCj5U0"/>
+<!-- Overlay Elements for Depth -->
+<div class="absolute inset-0 bg-gradient-to-t from-[#020B18] via-transparent to-transparent"></div>
+<!-- Floating Life Preserver Icon Overlay -->
+<div class="absolute bottom-1/4 left-1/2 -translate-x-1/2 animate-bounce-slow">
+<span class="material-symbols-outlined text-6xl text-error drop-shadow-[0_0_15px_rgba(255,180,171,0.4)]" data-icon="life_buoy" style="font-variation-settings: 'FILL' 1;">bubble</span>
+</div>
+<!-- Subtle Telemetry Overlay -->
+<div class="absolute top-4 left-4 font-mono text-[10px] text-primary/40 uppercase tracking-tighter">
+                    Status: Signal Lost<br/>
+                    Coord: 28.6139Â° N, 77.2090Â° E
+                </div>
+</div>
+<!-- Decorative Rain Streaks -->
+<div class="rain-line top-10 left-1/4" style="animation: slide-down 2s infinite linear;"></div>
+<div class="rain-line top-20 right-1/3" style="animation: slide-down 2.5s infinite linear;"></div>
+<div class="rain-line bottom-40 left-1/3" style="animation: slide-down 1.8s infinite linear;"></div>
+</div>
+<!-- Editorial Content -->
+<div class="space-y-4 max-w-lg relative z-20">
+<h2 class="font-headline font-semibold text-4xl md:text-6xl text-white tracking-tight">
+                Page washed away.
+            </h2>
+<p class="font-body text-lg text-[#6B7FA3] font-light">
+                The requested resource has been displaced by current events. Let's get you back to safety.
+            </p>
+</div>
+<!-- Call to Action -->
+<div class="mt-12 relative z-20">
+<a class="inline-flex items-center gap-3 bg-[#1A6FD4] text-on-primary-container px-10 py-4 rounded-xl font-headline font-bold text-lg hover:shadow-[0_0_30px_rgba(26,111,212,0.4)] active:scale-95 transition-all group" href="/dashboard">
+                Go to Dashboard
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<div class="mt-8 flex items-center justify-center gap-6">
+<button class="text-[#6B7FA3] font-label text-xs tracking-widest uppercase hover:text-white transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-base" data-icon="history">history</span>
+                    SYSTEM LOGS
+                </button>
+<div class="w-px h-4 bg-outline-variant/30"></div>
+<button class="text-[#6B7FA3] font-label text-xs tracking-widest uppercase hover:text-white transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-base" data-icon="support_agent">support_agent</span>
+                    CONTACT INTEL
+                </button>
+</div>
+</div>
+</main>
+<!-- Footer Signal -->
+<footer class="fixed bottom-8 w-full text-center z-10">
+<p class="font-label text-[10px] text-[#6B7FA3]/40 tracking-[0.3em] uppercase">
+            Sentinel Node Delta-7 // Operational
+        </p>
+</footer>
+<!-- Mobile Bottom Navigation (Suppressed label text for focus, utilizing JSON styles) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-[#020B18]/90 backdrop-blur-2xl border-t border-[#1A6FD4]/10 z-50 shadow-[0_-12px_40px_rgba(0,0,0,0.6)]">
+<div class="flex flex-col items-center justify-center text-[#6B7FA3] opacity-50">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#6B7FA3] opacity-50">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#6B7FA3] opacity-50">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#6B7FA3] opacity-50">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</div>
+</nav>
+<style>
+        @keyframes slide-down {
+            0% { transform: translateY(-100px); opacity: 0; }
+            50% { opacity: 0.4; }
+            100% { transform: translateY(400px); opacity: 0; }
+        }
+        @keyframes bounce-slow {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -15px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 4s ease-in-out infinite;
+        }
+    </style>
+</body></html>

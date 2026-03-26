@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports &amp; Analytics | FloodSense India</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-variant": "#2b3544",
+              "primary-fixed-dim": "#aac7ff",
+              "surface-dim": "#091421",
+              "on-error": "#690005",
+              "on-primary-fixed": "#001b3e",
+              "secondary-fixed": "#86f8c9",
+              "primary-fixed": "#d6e3ff",
+              "on-surface": "#d8e3f6",
+              "tertiary": "#ffb59b",
+              "on-secondary-container": "#003121",
+              "on-primary": "#002f64",
+              "surface-container-highest": "#2b3544",
+              "background": "#091421",
+              "error-container": "#93000a",
+              "secondary-fixed-dim": "#68dbae",
+              "secondary-container": "#26a37a",
+              "on-tertiary-fixed-variant": "#812800",
+              "tertiary-fixed-dim": "#ffb59b",
+              "on-secondary-fixed-variant": "#00513a",
+              "surface-container-high": "#202b39",
+              "on-primary-container": "#f4f5ff",
+              "on-secondary-fixed": "#002115",
+              "surface-container-lowest": "#040f1c",
+              "inverse-primary": "#005db9",
+              "inverse-surface": "#d8e3f6",
+              "on-secondary": "#003827",
+              "surface": "#091421",
+              "primary": "#aac7ff",
+              "tertiary-fixed": "#ffdbcf",
+              "primary-container": "#1a6fd4",
+              "surface-container-low": "#111c2a",
+              "inverse-on-surface": "#26313f",
+              "on-error-container": "#ffdad6",
+              "secondary": "#68dbae",
+              "on-surface-variant": "#c1c6d5",
+              "tertiary-container": "#c64508",
+              "on-tertiary": "#5b1a00",
+              "on-tertiary-fixed": "#380d00",
+              "surface-bright": "#2f3a49",
+              "outline": "#8b919e",
+              "on-primary-fixed-variant": "#00458d",
+              "on-background": "#d8e3f6",
+              "outline-variant": "#414753",
+              "surface-container": "#16202e",
+              "surface-tint": "#aac7ff",
+              "error": "#ffb4ab",
+              "on-tertiary": "#5b1a00",
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #091421;
+            color: #d8e3f6;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="overflow-x-hidden">
+<style>
+  #fs-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+    background: rgba(2,11,24,0.92); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 24px; font-family: 'Inter', sans-serif;
+  }
+  #fs-nav a { color: rgba(240,244,255,0.65); text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+  #fs-nav a:hover { color: #F0F4FF; background: rgba(255,255,255,0.06); }
+  #fs-nav .logo { font-weight: 700; letter-spacing: 0.15em; font-size: 14px; color: #F0F4FF; }
+  #fs-nav .logo span { color: #1A6FD4; }
+  body { padding-top: 52px !important; }
+</style>
+<div id="fs-nav">
+  <a class="logo" href="/screens/splash.html">FLOOD<span>SENSE</span></a>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/dashboard.html">Dashboard</a>
+    <a href="/screens/map.html">Live Map</a>
+    <a href="/screens/my-districts.html">My Districts</a>
+    <a href="/screens/alerts.html">Alerts</a>
+    <a href="/screens/reports.html">Reports</a>
+  </div>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/profile.html">Profile</a>
+    <a href="/screens/settings.html">Settings</a>
+    <a href="/screens/login.html" style="border:1px solid rgba(26,111,212,0.4);color:#1A6FD4;">Sign In</a>
+  </div>
+</div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#091421]/80 backdrop-blur-xl border-b border-white/10 shadow-[0_24px_48px_rgba(0,0,0,0.4)] flex items-center justify-between px-8 h-20">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold text-[#aac7ff] tracking-tighter font-['Space_Grotesk']">FloodSense India</span>
+<div class="h-6 w-[1px] bg-white/10 mx-2"></div>
+<h1 class="text-[#aac7ff] font-['Space_Grotesk'] font-bold tracking-tight">Reports &amp; Analytics</h1>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-['Inter'] font-semibold text-sm hover:bg-white/10 transition-colors active:scale-95 duration-200 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">add_chart</span>
+            Generate New Report
+        </button>
+</header>
+<div class="flex pt-20 min-h-screen">
+<!-- NavigationDrawer -->
+<aside class="fixed left-0 top-20 h-[calc(100vh-5rem)] w-1/5 bg-[#111c2a] flex flex-col py-6 px-4 gap-2 z-40">
+<div class="px-4 mb-4">
+<span class="font-['Inter'] text-xs font-semibold tracking-widest uppercase text-[#c1c6d5] opacity-70">REPORT TYPES</span>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/5 text-[#aac7ff] border-r-2 border-[#1a6fd4] transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">analytics</span>
+<span class="font-['Inter'] text-sm font-medium">District Summary</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#c1c6d5] opacity-70 hover:bg-white/5 hover:text-white transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">map</span>
+<span class="font-['Inter'] text-sm font-medium">State Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#c1c6d5] opacity-70 hover:bg-white/5 hover:text-white transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">compare_arrows</span>
+<span class="font-['Inter'] text-sm font-medium">Comparative Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#c1c6d5] opacity-70 hover:bg-white/5 hover:text-white transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">timeline</span>
+<span class="font-['Inter'] text-sm font-medium">Historical Trend</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#c1c6d5] opacity-70 hover:bg-white/5 hover:text-white transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">dashboard_customize</span>
+<span class="font-['Inter'] text-sm font-medium">Custom</span>
+</a>
+</nav>
+<div class="mt-auto p-4 glass-panel rounded-xl">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-2">Live Status</p>
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+</span>
+<span class="text-xs font-medium text-secondary">Systems Operational</span>
+</div>
+</div>
+</aside>
+<!-- Main Content (80%) -->
+<main class="ml-[20%] w-[80%] p-8 space-y-8 pb-24">
+<!-- Top Main Area: Filter Bar -->
+<section class="glass-panel p-6 rounded-xl flex flex-wrap items-center justify-between gap-6">
+<div class="flex flex-wrap items-center gap-6">
+<div class="flex flex-col gap-1.5">
+<label class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">District</label>
+<select class="bg-surface-container-lowest border border-white/10 rounded-lg px-4 py-2 text-sm text-on-surface focus:ring-2 focus:ring-primary outline-none min-w-[180px]">
+<option>Ernakulam, Kerala</option>
+<option>Wayanad, Kerala</option>
+<option>Chennai, TN</option>
+<option>Mumbai City, MH</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Date Range</label>
+<div class="flex items-center gap-2 bg-surface-container-lowest border border-white/10 rounded-lg px-4 py-2 text-sm">
+<span class="material-symbols-outlined text-sm opacity-60">calendar_today</span>
+<span>Aug 01, 2023 - Aug 14, 2023</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Active Metrics</label>
+<div class="flex items-center gap-4">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="rounded border-white/20 bg-transparent text-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="text-sm group-hover:text-primary transition-colors">Rainfall</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="rounded border-white/20 bg-transparent text-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="text-sm group-hover:text-primary transition-colors">River Levels</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-white/20 bg-transparent text-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="text-sm group-hover:text-primary transition-colors">Soil Saturation</span>
+</label>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2.5 rounded-lg border border-white/10 hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">refresh</span>
+</button>
+<button class="bg-primary-container text-on-primary-container px-5 py-2.5 rounded-lg font-semibold text-sm shadow-lg shadow-primary/20">
+                        Apply Filters
+                    </button>
+</div>
+</section>
+<!-- Middle Main Area: Charts Grid -->
+<section class="grid grid-cols-12 gap-6">
+<!-- Large Line Chart: Rainfall Trend -->
+<div class="col-span-8 glass-panel p-8 rounded-xl h-[420px] flex flex-col">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="font-headline text-xl font-bold tracking-tight text-white mb-1">Precipitation Velocity</h3>
+<p class="text-xs text-on-surface-variant">Real-time aggregate from 14 weather stations in Ernakulam</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary shadow-[0_0_8px_rgba(170,199,255,0.4)]"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Actual</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full border border-primary/40 bg-transparent"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Predicted</span>
+</div>
+</div>
+</div>
+<!-- Chart Placeholder Visual -->
+<div class="flex-grow relative mt-4">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 800 200">
+<defs>
+<lineargradient id="lineGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#aac7ff" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#aac7ff" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Lines -->
+<line stroke="white" stroke-opacity="0.05" x1="0" x2="800" y1="40" y2="40"></line>
+<line stroke="white" stroke-opacity="0.05" x1="0" x2="800" y1="80" y2="80"></line>
+<line stroke="white" stroke-opacity="0.05" x1="0" x2="800" y1="120" y2="120"></line>
+<line stroke="white" stroke-opacity="0.05" x1="0" x2="800" y1="160" y2="160"></line>
+<!-- Area -->
+<path d="M0 160 Q 100 140 200 155 T 400 80 T 600 110 T 800 40 L 800 200 L 0 200 Z" fill="url(#lineGradient)"></path>
+<!-- Line -->
+<path d="M0 160 Q 100 140 200 155 T 400 80 T 600 110 T 800 40" fill="none" stroke="#aac7ff" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute bottom-0 w-full flex justify-between text-[10px] text-on-surface-variant uppercase tracking-widest mt-4">
+<span>Aug 01</span><span>Aug 04</span><span>Aug 07</span><span>Aug 10</span><span>Aug 13</span>
+</div>
+</div>
+</div>
+<!-- Small Bar Chart: River Levels -->
+<div class="col-span-4 glass-panel p-8 rounded-xl h-[420px] flex flex-col">
+<h3 class="font-headline text-xl font-bold tracking-tight text-white mb-1">Basin Telemetry</h3>
+<p class="text-xs text-on-surface-variant mb-8">Current water depth vs threshold</p>
+<div class="space-y-6 flex-grow flex flex-col justify-center">
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium">Periyar River</span>
+<span class="text-xs font-bold text-[#C0392B]">CRITICAL</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-[#C0392B] w-[92%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium">Muvattupuzha</span>
+<span class="text-xs font-bold text-[#E85D24]">DANGER</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-[#E85D24] w-[78%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium">Chalakudy River</span>
+<span class="text-xs font-bold text-[#F0A500]">WARNING</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-[#F0A500] w-[62%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium">Pamba River</span>
+<span class="text-xs font-bold text-[#1D9E75]">SAFE</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-[#1D9E75] w-[34%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Main Area: Insights Panel -->
+<section class="grid grid-cols-12 gap-6">
+<div class="col-span-12 glass-panel p-8 rounded-xl">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h3 class="font-headline text-xl font-bold tracking-tight text-white">AI Synthetic Insights</h3>
+</div>
+<div class="grid grid-cols-3 gap-8">
+<div class="p-4 border-l-2 border-secondary/30 bg-secondary/5 rounded-r-lg">
+<p class="text-sm leading-relaxed text-on-surface/90">
+<strong class="text-secondary block mb-1">Saturation Alert</strong>
+                                Soil moisture index in the highland regions has reached 88%, significantly increasing the risk of landslides in the next 48 hours.
+                            </p>
+</div>
+<div class="p-4 border-l-2 border-primary/30 bg-primary/5 rounded-r-lg">
+<p class="text-sm leading-relaxed text-on-surface/90">
+<strong class="text-primary block mb-1">Discharge Trend</strong>
+                                Current discharge rates from Idukki dam suggest a controlled 5% increase to mitigate lower-basin accumulation by Friday morning.
+                            </p>
+</div>
+<div class="p-4 border-l-2 border-error/30 bg-error/5 rounded-r-lg">
+<p class="text-sm leading-relaxed text-on-surface/90">
+<strong class="text-error block mb-1">Evacuation Radius</strong>
+                                AI models suggest proactive evacuation for zones within 200m of Periyar bank specifically in the Aluva-Paravur stretch.
+                            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Export Bar -->
+<section class="glass-panel p-4 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Export Intelligence</span>
+<div class="h-4 w-[1px] bg-white/10"></div>
+<span class="text-sm text-on-surface/70 italic">Generated 2 minutes ago</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high border border-white/5 text-sm hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+                        Download PDF
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high border border-white/5 text-sm hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-lg">csv</span>
+                        Download CSV
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1a6fd4] text-white text-sm hover:opacity-90 transition-colors">
+<span class="material-symbols-outlined text-lg">share</span>
+                        Share Link
+                    </button>
+</div>
+</section>
+<!-- Full-width below: Most common reports -->
+<section class="space-y-6 pt-10">
+<div class="flex items-center justify-between">
+<h2 class="font-headline text-2xl font-bold tracking-tight text-white">Most Common Reports</h2>
+<button class="text-sm text-primary font-semibold hover:underline">View All Directory</button>
+</div>
+<div class="grid grid-cols-6 gap-4">
+<!-- Card 1 -->
+<div class="glass-panel p-6 rounded-xl hover:bg-white/[0.08] transition-all cursor-pointer group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white">water_drop</span>
+</div>
+<h4 class="text-sm font-bold mb-1">Annual Monsoon Summary</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Updated Yearly</p>
+</div>
+<!-- Card 2 -->
+<div class="glass-panel p-6 rounded-xl hover:bg-white/[0.08] transition-all cursor-pointer group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white">emergency_home</span>
+</div>
+<h4 class="text-sm font-bold mb-1">Infrastructure Risk Map</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Updated Weekly</p>
+</div>
+<!-- Card 3 -->
+<div class="glass-panel p-6 rounded-xl hover:bg-white/[0.08] transition-all cursor-pointer group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white">groups</span>
+</div>
+<h4 class="text-sm font-bold mb-1">Population Displacement</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Real-time Data</p>
+</div>
+<!-- Card 4 -->
+<div class="glass-panel p-6 rounded-xl hover:bg-white/[0.08] transition-all cursor-pointer group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white">agriculture</span>
+</div>
+<h4 class="text-sm font-bold mb-1">Crop Inundation Analysis</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Updated Monthly</p>
+</div>
+<!-- Card 5 -->
+<div class="glass-panel p-6 rounded-xl hover:bg-white/[0.08] transition-all cursor-pointer group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white">warning</span>
+</div>
+<h4 class="text-sm font-bold mb-1">Historical Breach Data</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Archive Access</p>
+</div>
+<!-- Card 6 -->
+<div class="glass-panel p-6 rounded-xl hover:bg-white/[0.08] transition-all cursor-pointer group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white">cloud_sync</span>
+</div>
+<h4 class="text-sm font-bold mb-1">Meteorological Forcing</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Advanced Forecast</p>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Floating HUD Detail (Atmospheric depth) -->
+<div class="fixed bottom-6 right-6 z-50 pointer-events-none">
+<div class="glass-panel p-4 rounded-xl border-l-4 border-primary pointer-events-auto shadow-2xl">
+<div class="flex items-center gap-3">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">sensors</span>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Telemetry Active</p>
+<p class="text-xs font-medium text-white">452 Nodes Transmitting</p>
+</div>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-variant": "#2b3544",
+              "surface-bright": "#2f3a49",
+              "tertiary-fixed": "#ffdbcf",
+              "error": "#ffb4ab",
+              "primary": "#aac7ff",
+              "on-primary-fixed": "#001b3e",
+              "on-tertiary-container": "#fff3f0",
+              "on-primary": "#002f64",
+              "surface-container-highest": "#2b3544",
+              "on-primary-fixed-variant": "#00458d",
+              "surface-tint": "#aac7ff",
+              "surface-dim": "#091421",
+              "error-container": "#93000a",
+              "tertiary": "#ffb59b",
+              "inverse-primary": "#005db9",
+              "on-primary-container": "#f4f5ff",
+              "surface-container-low": "#111c2a",
+              "outline-variant": "#414753",
+              "secondary-container": "#26a37a",
+              "secondary-fixed-dim": "#68dbae",
+              "on-error": "#690005",
+              "primary-fixed-dim": "#aac7ff",
+              "surface-container": "#16202e",
+              "on-secondary-fixed-variant": "#00513a",
+              "primary-fixed": "#d6e3ff",
+              "on-error-container": "#ffdad6",
+              "on-secondary-container": "#003121",
+              "on-surface-variant": "#c1c6d5",
+              "on-secondary": "#003827",
+              "inverse-on-surface": "#26313f",
+              "secondary-fixed": "#86f8c9",
+              "on-secondary-fixed": "#002115",
+              "tertiary-fixed-dim": "#ffb59b",
+              "background": "#091421",
+              "surface-container-high": "#202b39",
+              "on-background": "#d8e3f6",
+              "on-tertiary": "#5b1a00",
+              "outline": "#8b919e",
+              "on-surface": "#d8e3f6",
+              "secondary": "#68dbae",
+              "inverse-surface": "#d8e3f6",
+              "surface-container-lowest": "#040f1c",
+              "tertiary-container": "#c64508",
+              "on-tertiary-fixed-variant": "#812800",
+              "surface": "#091421",
+              "primary-container": "#1a6fd4",
+              "on-tertiary-fixed": "#380d00"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "xxl": "1.25rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #020B18; color: #d8e3f6; font-family: 'Inter', sans-serif; overflow: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .map-gradient-overlay { background: radial-gradient(circle at center, transparent 0%, #020B18 90%); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #414753; border-radius: 10px; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="h-screen flex flex-col">
+<style>
+  #fs-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+    background: rgba(2,11,24,0.92); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 24px; font-family: 'Inter', sans-serif;
+  }
+  #fs-nav a { color: rgba(240,244,255,0.65); text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+  #fs-nav a:hover { color: #F0F4FF; background: rgba(255,255,255,0.06); }
+  #fs-nav .logo { font-weight: 700; letter-spacing: 0.15em; font-size: 14px; color: #F0F4FF; }
+  #fs-nav .logo span { color: #1A6FD4; }
+  body { padding-top: 52px !important; }
+</style>
+<div id="fs-nav">
+  <a class="logo" href="/screens/splash.html">FLOOD<span>SENSE</span></a>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/dashboard.html">Dashboard</a>
+    <a href="/screens/map.html">Live Map</a>
+    <a href="/screens/my-districts.html">My Districts</a>
+    <a href="/screens/alerts.html">Alerts</a>
+    <a href="/screens/reports.html">Reports</a>
+  </div>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/profile.html">Profile</a>
+    <a href="/screens/settings.html">Settings</a>
+    <a href="/screens/login.html" style="border:1px solid rgba(26,111,212,0.4);color:#1A6FD4;">Sign In</a>
+  </div>
+</div>
+<!-- TopAppBar Shared Component -->
+<header class="fixed top-0 w-full z-50 bg-[#091421]/80 backdrop-blur-xl flex items-center justify-between px-6 h-20 w-full shadow-[0_40px_40px_0_rgba(0,27,62,0.06)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#aac7ff] text-3xl" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<h1 class="font-['Space_Grotesk'] font-bold tracking-tighter text-2xl text-[#aac7ff]">FloodSense India</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#aac7ff] border-b-2 border-[#1a6fd4] font-['Space_Grotesk'] font-bold tracking-tight py-1 transition-colors duration-300" href="#">Live Map</a>
+<a class="text-[#c1c6d5] font-['Space_Grotesk'] font-bold tracking-tight py-1 hover:text-white transition-colors duration-300" href="#">Analytics</a>
+<a class="text-[#c1c6d5] font-['Space_Grotesk'] font-bold tracking-tight py-1 hover:text-white transition-colors duration-300" href="#">Sensors</a>
+<a class="text-[#c1c6d5] font-['Space_Grotesk'] font-bold tracking-tight py-1 hover:text-white transition-colors duration-300" href="#">Reports</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#c1c6d5] hover:text-white transition-colors">search</button>
+<div class="h-10 w-10 rounded-full bg-primary-container flex items-center justify-center text-white font-bold text-xs border border-white/10">
+                IND
+            </div>
+</div>
+</header>
+<main class="flex-1 flex mt-20 overflow-hidden">
+<!-- Map Canvas (70%) -->
+<section class="relative w-full lg:w-[70%] h-full bg-surface-dim overflow-hidden">
+<!-- 3D Abstract Map Placeholder -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full opacity-60 mix-blend-screen" data-alt="abstract 3d visualization of india map with glowing neon boundaries and translucent district prisms in deep blue and teal tones" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAo_vvEU1TYsxr-5hkBI14nKjkmFZXuBW51jO1zaq2Ynyi5_IgaWIiPgmtPl4NHjmZbB7ve4XPdfNCeXLUYLi9--7tpWr2Up0fNyER4rlA72WXo9-Yzp-sA9uzTx-_r2OIbCscv_5ATodDo5DdWYnjpELXv7ahxixYwvSNjBq4hDv59me9ueIoK8cF_6ar9siIM-Q-c1WqJYuJSMkNQ2BdjA2d6d32WjN2TegSOUBT2Gugj7st0AxQp-qqXQlKLsidTxbqH_i0UxRs'); background-size: cover; background-position: center;"></div>
+<div class="absolute inset-0 map-gradient-overlay pointer-events-none"></div>
+</div>
+<!-- Top Left: Layer Toggles -->
+<div class="absolute top-6 left-6 z-10 flex flex-col gap-2">
+<div class="glass p-1.5 rounded-xl flex flex-col gap-1">
+<button class="flex items-center gap-3 px-4 py-2.5 bg-primary-container text-white rounded-lg text-sm font-medium transition-all">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">cloudy_snowing</span>
+                        Rainfall
+                    </button>
+<button class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:bg-white/5 rounded-lg text-sm font-medium transition-all">
+<span class="material-symbols-outlined text-sm">water</span>
+                        River Network
+                    </button>
+<button class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:bg-white/5 rounded-lg text-sm font-medium transition-all">
+<span class="material-symbols-outlined text-sm">satellite_alt</span>
+                        Satellite
+                    </button>
+</div>
+</div>
+<!-- Top Right: Search -->
+<div class="absolute top-6 right-6 z-10 w-80">
+<div class="glass flex items-center px-4 py-3 rounded-xxl">
+<span class="material-symbols-outlined text-on-surface-variant mr-3">search</span>
+<input class="bg-transparent border-none text-on-surface placeholder:text-outline focus:ring-0 w-full text-sm font-body" placeholder="Search district..." type="text"/>
+</div>
+</div>
+<!-- Map Interactions Overlays -->
+<div class="absolute bottom-32 left-1/2 -translate-x-1/2 z-10 w-full max-w-2xl px-6">
+<div class="glass p-6 rounded-xxl shadow-2xl">
+<div class="flex justify-between items-center mb-4">
+<span class="text-xs font-bold tracking-widest text-on-surface-variant uppercase">Time Scrubber: Past 7 Days</span>
+<span class="text-xs font-medium text-primary bg-primary-container/20 px-2 py-1 rounded">LIVE UPDATING</span>
+</div>
+<div class="relative h-2 bg-surface-container-highest rounded-full flex items-center">
+<div class="absolute left-0 w-3/4 h-full bg-gradient-to-r from-primary-container to-primary rounded-full"></div>
+<div class="absolute left-[75%] -translate-x-1/2 w-5 h-5 bg-white rounded-full border-4 border-primary shadow-lg cursor-pointer"></div>
+</div>
+<div class="flex justify-between mt-3 text-[10px] text-outline font-medium">
+<span>OCT 20</span>
+<span>OCT 22</span>
+<span>OCT 24</span>
+<span>OCT 26</span>
+<span class="text-on-surface">TODAY</span>
+</div>
+</div>
+</div>
+<!-- Floating Legend -->
+<div class="absolute bottom-32 right-6 z-10">
+<div class="glass p-4 rounded-xl flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-[#1D9E75] shadow-[0_0_8px_#1D9E75]"></div>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider">Safe</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-[#F0A500] shadow-[0_0_8px_#F0A500]"></div>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider">Warning</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-[#E85D24] shadow-[0_0_8px_#E85D24]"></div>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider">Danger</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-[#C0392B] shadow-[0_0_8px_#C0392B]"></div>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider">Critical</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Data Panel (30%) -->
+<aside class="hidden lg:flex w-[30%] flex-col bg-surface-container-lowest border-l border-white/5 h-full">
+<div class="p-8 pb-4">
+<h2 class="font-headline text-2xl font-bold text-white tracking-tight">Current National Status</h2>
+<div class="flex items-center gap-2 mt-2">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<p class="text-xs text-on-surface-variant font-medium">Monitoring 748 active sensor stations</p>
+</div>
+</div>
+<!-- Live Alert Feed -->
+<div class="flex-1 overflow-y-auto custom-scrollbar px-8 py-4 space-y-4">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] text-outline">Live Alerts</h3>
+<span class="text-[10px] text-primary">View All</span>
+</div>
+<!-- Alert Card 1 -->
+<div class="p-4 rounded-xl bg-surface-container-high border-l-4 border-[#C0392B] shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-[#C0392B] uppercase tracking-widest">CRITICAL LEVEL</span>
+<span class="text-[10px] text-outline">2m ago</span>
+</div>
+<p class="text-sm font-semibold text-white leading-snug">Dibrugarh District, Assam</p>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Brahmaputra exceeds danger mark by 1.45m at Neamatighat.</p>
+</div>
+<!-- Alert Card 2 -->
+<div class="p-4 rounded-xl bg-surface-container border-l-4 border-[#E85D24]">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-[#E85D24] uppercase tracking-widest">DANGER ALERT</span>
+<span class="text-[10px] text-outline">14m ago</span>
+</div>
+<p class="text-sm font-semibold text-white leading-snug">North Bihar Cluster</p>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Kosi river surge detected. Rapid evacuation advised in Zone 4.</p>
+</div>
+<!-- Top 5 List -->
+<div class="pt-6 space-y-4">
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] text-outline">Top 5 At-Risk Districts</h3>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<span class="font-headline font-bold text-lg text-outline w-6">01</span>
+<span class="text-sm font-medium text-white">Lakhimpur</span>
+</div>
+<span class="text-xs font-bold text-[#C0392B]">9.4/10</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<span class="font-headline font-bold text-lg text-outline w-6">02</span>
+<span class="text-sm font-medium text-white">Dhemaji</span>
+</div>
+<span class="text-xs font-bold text-[#C0392B]">8.9/10</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<span class="font-headline font-bold text-lg text-outline w-6">03</span>
+<span class="text-sm font-medium text-white">Sitamarhi</span>
+</div>
+<span class="text-xs font-bold text-[#E85D24]">8.2/10</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<span class="font-headline font-bold text-lg text-outline w-6">04</span>
+<span class="text-sm font-medium text-white">Wayanad</span>
+</div>
+<span class="text-xs font-bold text-[#F0A500]">7.5/10</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<span class="font-headline font-bold text-lg text-outline w-6">05</span>
+<span class="text-sm font-medium text-white">Ratnagiri</span>
+</div>
+<span class="text-xs font-bold text-[#F0A500]">6.8/10</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel Footer Actions -->
+<div class="p-8 bg-surface-container-lowest grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 py-3 rounded-xl bg-surface-container-high border border-white/5 hover:bg-white/5 text-sm font-medium text-on-surface transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+                    Download CSV
+                </button>
+<button class="flex items-center justify-center gap-2 py-3 rounded-xl bg-primary-container text-white text-sm font-medium transition-all hover:opacity-90 active:scale-95">
+<span class="material-symbols-outlined text-sm">share</span>
+                    Share Map
+                </button>
+</div>
+</aside>
+</main>
+<!-- BottomNavBar Shared Component -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-20 bg-[#091421]/90 backdrop-blur-2xl flex justify-around items-center px-4 pb-safe border-t border-white/10 z-50 rounded-t-[20px] shadow-2xl">
+<button class="flex flex-col items-center justify-center bg-[#1a6fd4]/20 text-[#aac7ff] rounded-xl px-6 py-2 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Live Map</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#c1c6d5] opacity-60 hover:opacity-100 transition-all">
+<span class="material-symbols-outlined">insert_chart</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Analytics</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#c1c6d5] opacity-60 hover:opacity-100 transition-all">
+<span class="material-symbols-outlined">sensors</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Sensors</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#c1c6d5] opacity-60 hover:opacity-100 transition-all">
+<span class="material-symbols-outlined">description</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Reports</span>
+</button>
+</nav>
+</body></html>

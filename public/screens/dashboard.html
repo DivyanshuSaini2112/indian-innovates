@@ -1,0 +1,586 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FloodSense India | Sentinel Intelligence Layer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary": "#5b1a00",
+                        "primary-container": "#1a6fd4",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#001b3e",
+                        "background": "#091421",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "on-tertiary-container": "#fff3f0",
+                        "surface-container": "#16202e",
+                        "secondary-fixed-dim": "#b0c7f4",
+                        "on-secondary-fixed-variant": "#30476d",
+                        "inverse-surface": "#d8e3f6",
+                        "on-secondary-container": "#9fb6e2",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#202b39",
+                        "on-secondary-fixed": "#001b3e",
+                        "surface-container-low": "#111c2a",
+                        "on-secondary": "#183055",
+                        "on-primary-container": "#f4f5ff",
+                        "on-primary-fixed-variant": "#00458d",
+                        "on-primary": "#002f64",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#b0c7f4",
+                        "surface-bright": "#2f3a49",
+                        "surface-tint": "#aac7ff",
+                        "on-background": "#d8e3f6",
+                        "surface-container-highest": "#2b3544",
+                        "tertiary-fixed": "#ffdbcf",
+                        "inverse-on-surface": "#26313f",
+                        "surface-container-lowest": "#040f1c",
+                        "primary-fixed": "#d6e3ff",
+                        "secondary-container": "#30476d",
+                        "tertiary-container": "#c64508",
+                        "on-tertiary-fixed": "#380d00",
+                        "primary": "#aac7ff",
+                        "on-surface-variant": "#c1c6d5",
+                        "surface-variant": "#2b3544",
+                        "primary-fixed-dim": "#aac7ff",
+                        "outline": "#8b919e",
+                        "tertiary": "#ffb59b",
+                        "on-surface": "#d8e3f6",
+                        "outline-variant": "#414753",
+                        "inverse-primary": "#005db9",
+                        "surface-dim": "#091421",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "surface": "#091421",
+                        "secondary-fixed": "#d6e3ff",
+                        "on-error": "#690005",
+                        "danger": "#E85D24",
+                        "safe": "#1D9E75",
+                        "warning": "#F0A500",
+                        "critical": "#C0392B"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1.25rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #091421; color: #d8e3f6; }
+        h1, h2, h3, h4, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen selection:bg-primary/30">
+<style>
+  #fs-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+    background: rgba(2,11,24,0.92); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 24px; font-family: 'Inter', sans-serif;
+  }
+  #fs-nav a { color: rgba(240,244,255,0.65); text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+  #fs-nav a:hover { color: #F0F4FF; background: rgba(255,255,255,0.06); }
+  #fs-nav .logo { font-weight: 700; letter-spacing: 0.15em; font-size: 14px; color: #F0F4FF; }
+  #fs-nav .logo span { color: #1A6FD4; }
+  body { padding-top: 52px !important; }
+</style>
+<div id="fs-nav">
+  <a class="logo" href="/screens/splash.html">FLOOD<span>SENSE</span></a>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/dashboard.html">Dashboard</a>
+    <a href="/screens/map.html">Live Map</a>
+    <a href="/screens/my-districts.html">My Districts</a>
+    <a href="/screens/alerts.html">Alerts</a>
+    <a href="/screens/reports.html">Reports</a>
+  </div>
+  <div style="display:flex;gap:2px;">
+    <a href="/screens/profile.html">Profile</a>
+    <a href="/screens/settings.html">Settings</a>
+    <a href="/screens/login.html" style="border:1px solid rgba(26,111,212,0.4);color:#1A6FD4;">Sign In</a>
+  </div>
+</div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/40 backdrop-blur-xl shadow-2xl shadow-black/50 h-20 flex justify-between items-center px-8 border-b border-white/5">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-400 text-3xl" data-icon="waves">waves</span>
+<span class="text-2xl font-bold tracking-tighter text-white font-headline">FloodSense India</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-blue-400 border-b-2 border-blue-500 pb-1 font-bold font-label text-[11px] tracking-widest uppercase" href="#">Overview</a>
+<a class="text-slate-400 hover:text-white transition-colors font-label text-[11px] tracking-widest uppercase" href="#">Live Map</a>
+<a class="text-slate-400 hover:text-white transition-colors font-label text-[11px] tracking-widest uppercase" href="#">My Districts</a>
+<a class="text-slate-400 hover:text-white transition-colors font-label text-[11px] tracking-widest uppercase" href="#">Alerts</a>
+<a class="text-slate-400 hover:text-white transition-colors font-label text-[11px] tracking-widest uppercase" href="#">Reports</a>
+</nav>
+<div class="flex items-center gap-6">
+<button class="relative p-2 text-slate-400 hover:text-white transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-danger rounded-full ring-4 ring-slate-950/40"></span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-white/10">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-white uppercase tracking-tighter">Arjun S.</p>
+<p class="text-[10px] text-blue-400 font-medium">Chief Analyst</p>
+</div>
+<div class="w-10 h-10 rounded-xl overflow-hidden border border-white/20">
+<img class="w-full h-full object-cover" data-alt="professional portrait of a south asian man in business attire, clean corporate lighting, neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9qRQ8dtjJnZoa4j-EtMwZumUH3b9_G0ar8dgk--SRxy3B_s5krAbs-hkKNntq54AF6qpmqy2AMwbpqBWm6BF9VJJfnqT43rHUwwYL0YhSh_j-uQB8v0cABMEEQVwqTgdVwgLu4Jr--xriTcuy5WdW6ie3Zn-UIUmXfu6YzRPsEW3If5w2QImmdcTJtKRQOEBSO4bS-VjfOm6BL3uqmLTtFLx-G9kHTx_yRLkjkoPC0SKsX3di5j5SksDc2470J_5ZjEOn8G9srrM"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex pt-20 min-h-screen">
+<!-- NavigationDrawer / Sidebar -->
+<aside class="hidden md:flex flex-col gap-8 p-6 w-64 fixed h-[calc(100vh-5rem)] border-r border-white/5 bg-[#091421] shadow-inner">
+<div class="space-y-1">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-widest">Operator Status</p>
+<h3 class="text-white font-headline text-lg font-bold">Good morning, Arjun.</h3>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<div class="glass p-4 rounded-xl flex justify-between items-center border-l-2 border-l-primary-container">
+<div>
+<p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Districts</p>
+<p class="text-xl font-headline font-bold text-white">12</p>
+</div>
+<span class="material-symbols-outlined text-blue-500/50" data-icon="location_city">location_city</span>
+</div>
+<div class="glass p-4 rounded-xl flex justify-between items-center border-l-2 border-l-danger">
+<div>
+<p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Alerts</p>
+<p class="text-xl font-headline font-bold text-danger">04</p>
+</div>
+<span class="material-symbols-outlined text-danger/50" data-icon="notification_important">notification_important</span>
+</div>
+</div>
+<div class="space-y-4 flex-1 overflow-y-auto no-scrollbar">
+<div class="flex justify-between items-center">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-widest">Pinned Districts</p>
+<button class="text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+</button>
+</div>
+<div class="space-y-2">
+<!-- District Item -->
+<div class="flex items-center justify-between p-2 rounded-lg hover:bg-white/5 transition-all group">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-white group-hover:text-primary transition-colors">Wayanad</span>
+<span class="text-[10px] text-slate-500">Kerala</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="h-4 w-12 bg-white/5 rounded-sm overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-danger/20 to-danger/40 h-full w-2/3"></div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-danger/20 text-danger text-[9px] font-bold uppercase">Critical</span>
+</div>
+</div>
+<!-- District Item -->
+<div class="flex items-center justify-between p-2 rounded-lg hover:bg-white/5 transition-all group">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-white group-hover:text-primary transition-colors">Patna</span>
+<span class="text-[10px] text-slate-500">Bihar</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="h-4 w-12 bg-white/5 rounded-sm overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-warning/20 to-warning/40 h-full w-1/2"></div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-warning/20 text-warning text-[9px] font-bold uppercase">Warning</span>
+</div>
+</div>
+<!-- District Item -->
+<div class="flex items-center justify-between p-2 rounded-lg hover:bg-white/5 transition-all group">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-white group-hover:text-primary transition-colors">Guwahati</span>
+<span class="text-[10px] text-slate-500">Assam</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="h-4 w-12 bg-white/5 rounded-sm overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-safe/20 to-safe/40 h-full w-1/4"></div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-safe/20 text-safe text-[9px] font-bold uppercase">Safe</span>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-4 border-t border-white/5 mt-auto">
+<p class="text-[10px] text-slate-600 uppercase tracking-tighter">Last Sync: 12:44:02 IST</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-safe animate-pulse"></span>
+<span class="text-[10px] text-slate-400">Sentinel Uplink Active</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 p-8 overflow-x-hidden">
+<!-- Top Row: Stat Cards -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+<div class="glass p-6 rounded-2xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 blur-3xl -mr-12 -mt-12 group-hover:bg-primary/20 transition-all"></div>
+<p class="text-[11px] font-bold tracking-widest text-slate-400 uppercase mb-4">National Alert Level</p>
+<div class="flex items-end justify-between">
+<h2 class="text-4xl font-headline font-bold text-white tracking-tighter">72%</h2>
+<div class="w-12 h-12 rounded-full border-4 border-white/10 border-t-warning flex items-center justify-center">
+<span class="material-symbols-outlined text-warning text-sm" data-icon="priority_high">priority_high</span>
+</div>
+</div>
+<p class="text-xs text-warning mt-4 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span> Elevated Risk Detected
+                    </p>
+</div>
+<div class="glass p-6 rounded-2xl relative overflow-hidden group">
+<p class="text-[11px] font-bold tracking-widest text-slate-400 uppercase mb-4">Districts in Red</p>
+<div class="flex items-end justify-between">
+<h2 class="text-4xl font-headline font-bold text-danger tracking-tighter">08</h2>
+<span class="material-symbols-outlined text-danger/30 text-4xl" data-icon="error">error</span>
+</div>
+<p class="text-xs text-slate-500 mt-4 font-medium">Across 4 State Jurisdictions</p>
+</div>
+<div class="glass p-6 rounded-2xl relative overflow-hidden group">
+<p class="text-[11px] font-bold tracking-widest text-slate-400 uppercase mb-4">Rainfall (Avg)</p>
+<div class="flex items-end justify-between">
+<h2 class="text-4xl font-headline font-bold text-white tracking-tighter">42<span class="text-xl font-normal text-slate-500 ml-1">mm</span></h2>
+<span class="material-symbols-outlined text-blue-400/30 text-4xl" data-icon="rainy">rainy</span>
+</div>
+<p class="text-xs text-safe mt-4 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="trending_down">trending_down</span> -12% from yesterday
+                    </p>
+</div>
+<div class="glass p-6 rounded-2xl relative overflow-hidden group">
+<p class="text-[11px] font-bold tracking-widest text-slate-400 uppercase mb-4">Rivers Above Danger</p>
+<div class="flex items-end justify-between">
+<h2 class="text-4xl font-headline font-bold text-white tracking-tighter">14</h2>
+<span class="material-symbols-outlined text-blue-300/30 text-4xl" data-icon="water_full">water_full</span>
+</div>
+<p class="text-xs text-danger mt-4 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="arrow_upward">arrow_upward</span> 3 new since last report
+                    </p>
+</div>
+</section>
+<!-- Middle Row: Districts Horizontal Scroll -->
+<section class="mb-12">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-headline font-bold text-white">Your Districts at a Glance</h3>
+<button class="text-blue-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:underline">
+                        View All <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="flex overflow-x-auto gap-6 pb-6 no-scrollbar -mx-2 px-2">
+<!-- District Card 1 -->
+<div class="min-w-[300px] glass p-6 rounded-2xl hover:bg-white/[0.06] transition-all cursor-pointer border-t-4 border-t-danger">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="text-lg font-headline font-bold text-white">Wayanad</h4>
+<p class="text-xs text-slate-500">Kerala, India</p>
+</div>
+<span class="px-2 py-1 rounded bg-danger text-white text-[10px] font-black tracking-widest uppercase">Critical</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-[10px] uppercase font-bold text-slate-400 mb-1">
+<span>Risk Score</span>
+<span class="text-white">92/100</span>
+</div>
+<div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-danger w-[92%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex-1">
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Precipitation</p>
+<p class="text-xl font-headline font-bold text-white">124<span class="text-xs font-normal text-slate-500 ml-1">mm</span></p>
+</div>
+<div class="flex-1">
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Water Level</p>
+<p class="text-xl font-headline font-bold text-white">+2.4<span class="text-xs font-normal text-slate-500 ml-1">m</span></p>
+</div>
+</div>
+</div>
+</div>
+<!-- District Card 2 -->
+<div class="min-w-[300px] glass p-6 rounded-2xl hover:bg-white/[0.06] transition-all cursor-pointer border-t-4 border-t-warning">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="text-lg font-headline font-bold text-white">Darbhanga</h4>
+<p class="text-xs text-slate-500">Bihar, India</p>
+</div>
+<span class="px-2 py-1 rounded bg-warning text-slate-900 text-[10px] font-black tracking-widest uppercase">Warning</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-[10px] uppercase font-bold text-slate-400 mb-1">
+<span>Risk Score</span>
+<span class="text-white">64/100</span>
+</div>
+<div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-warning w-[64%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex-1">
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Precipitation</p>
+<p class="text-xl font-headline font-bold text-white">48<span class="text-xs font-normal text-slate-500 ml-1">mm</span></p>
+</div>
+<div class="flex-1">
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Water Level</p>
+<p class="text-xl font-headline font-bold text-white">+0.8<span class="text-xs font-normal text-slate-500 ml-1">m</span></p>
+</div>
+</div>
+</div>
+</div>
+<!-- District Card 3 -->
+<div class="min-w-[300px] glass p-6 rounded-2xl hover:bg-white/[0.06] transition-all cursor-pointer border-t-4 border-t-safe">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="text-lg font-headline font-bold text-white">Dibrugarh</h4>
+<p class="text-xs text-slate-500">Assam, India</p>
+</div>
+<span class="px-2 py-1 rounded bg-safe text-white text-[10px] font-black tracking-widest uppercase">Safe</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-[10px] uppercase font-bold text-slate-400 mb-1">
+<span>Risk Score</span>
+<span class="text-white">18/100</span>
+</div>
+<div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-safe w-[18%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex-1">
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Precipitation</p>
+<p class="text-xl font-headline font-bold text-white">12<span class="text-xs font-normal text-slate-500 ml-1">mm</span></p>
+</div>
+<div class="flex-1">
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Water Level</p>
+<p class="text-xl font-headline font-bold text-white">-0.4<span class="text-xs font-normal text-slate-500 ml-1">m</span></p>
+</div>
+</div>
+</div>
+</div>
+<!-- District Card 4 -->
+<div class="min-w-[300px] glass p-6 rounded-2xl hover:bg-white/[0.06] transition-all cursor-pointer border-t-4 border-t-primary">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="text-lg font-headline font-bold text-white">Pune</h4>
+<p class="text-xs text-slate-500">Maharashtra, India</p>
+</div>
+<span class="px-2 py-1 rounded bg-primary text-slate-900 text-[10px] font-black tracking-widest uppercase">Stable</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-[10px] uppercase font-bold text-slate-400 mb-1">
+<span>Risk Score</span>
+<span class="text-white">24/100</span>
+</div>
+<div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[24%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex-1">
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Precipitation</p>
+<p class="text-xl font-headline font-bold text-white">22<span class="text-xs font-normal text-slate-500 ml-1">mm</span></p>
+</div>
+<div class="flex-1">
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Water Level</p>
+<p class="text-xl font-headline font-bold text-white">+0.1<span class="text-xs font-normal text-slate-500 ml-1">m</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Two-Column: Map & Alerts -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+<!-- Map Column -->
+<div class="flex flex-col gap-4">
+<h3 class="text-xl font-headline font-bold text-white">National Risk Heatmap</h3>
+<div class="glass h-[400px] rounded-2xl overflow-hidden relative group">
+<div class="absolute inset-0 grayscale brightness-50 contrast-125 opacity-40 group-hover:opacity-60 transition-opacity">
+<img class="w-full h-full object-cover" data-alt="abstract satellite view of earth terrain with deep blue and black colors, high contrast geographic details" data-location="India" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTjUc3_U8GmiKCYVt21I_mOFOtYV53G7zSEWS7HUlahOtXtKOszNdPhWLAcYu5APv-zX7wmtt5U6xhjJOsyFvMwbTCjaaVuN5hgbwVprk1Qz1qQh66r5yEKzKXmkM8wjzUy0DTwZpTSKTKYkbkObdDc-A7pODbEgLYAvkY51Z-hAhxsbp2ta8Nmu7ySOB_BgSZx-TivQNodcYrtD_Mr_UhQNUf3qMMBFilh3B_0iZVkLILZXCiCWvuRtuanBcpM7gzgxAtKgnzJJw"/>
+</div>
+<!-- UI Overlays on Map -->
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<div class="glass p-2 rounded-lg text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-danger"></span> High Risk Zones
+                            </div>
+<div class="glass p-2 rounded-lg text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-warning"></span> Rising Monitor
+                            </div>
+</div>
+<div class="absolute bottom-4 right-4 glass p-3 rounded-xl">
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-white/20"><span class="material-symbols-outlined text-sm" data-icon="add">add</span></button>
+<button class="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-white/20"><span class="material-symbols-outlined text-sm" data-icon="remove">remove</span></button>
+</div>
+</div>
+<!-- Pulse Dots representing districts -->
+<div class="absolute top-1/2 left-1/3 w-4 h-4 bg-danger rounded-full animate-ping"></div>
+<div class="absolute top-1/2 left-1/3 w-4 h-4 bg-danger rounded-full"></div>
+<div class="absolute bottom-1/3 right-1/4 w-3 h-3 bg-warning rounded-full animate-ping"></div>
+<div class="absolute bottom-1/3 right-1/4 w-3 h-3 bg-warning rounded-full"></div>
+</div>
+</div>
+<!-- Alerts Feed Column -->
+<div class="flex flex-col gap-4">
+<h3 class="text-xl font-headline font-bold text-white">Latest Alerts Feed</h3>
+<div class="glass rounded-2xl flex-1 overflow-y-auto max-h-[400px] no-scrollbar p-2">
+<div class="space-y-1">
+<!-- Alert Item -->
+<div class="p-4 rounded-xl hover:bg-white/5 border-l-4 border-l-critical bg-white/[0.02] flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-critical/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-critical" data-icon="report">report</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-white">Flash Flood Emergency</h4>
+<span class="text-[10px] text-slate-500 font-medium">2 mins ago</span>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed mb-2">Wayanad District: Severe flash flood detected in northern hills. Immediate evacuation protocols initiated for low-lying areas.</p>
+<div class="flex gap-2">
+<span class="text-[9px] font-bold bg-white/10 px-2 py-0.5 rounded text-white uppercase">Sector 4-B</span>
+<span class="text-[9px] font-bold bg-white/10 px-2 py-0.5 rounded text-white uppercase">Kerala SDRF</span>
+</div>
+</div>
+</div>
+<!-- Alert Item -->
+<div class="p-4 rounded-xl hover:bg-white/5 border-l-4 border-l-warning flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-warning/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-warning" data-icon="warning">warning</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-white">River Level Warning</h4>
+<span class="text-[10px] text-slate-500 font-medium">15 mins ago</span>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed">Patna District: Ganges river has crossed the caution mark at Digha Ghat. Levels are rising at 3cm/hr.</p>
+</div>
+</div>
+<!-- Alert Item -->
+<div class="p-4 rounded-xl hover:bg-white/5 border-l-4 border-l-danger flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-danger/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-danger" data-icon="flood">flood</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-white">Structural Integrity Alert</h4>
+<span class="text-[10px] text-slate-500 font-medium">42 mins ago</span>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed">Guwahati District: Brahmaputra Embankment Section 12 shows signs of seepage. Engineering team dispatched.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Forecast Section -->
+<section class="mb-20">
+<div class="flex flex-col gap-6 glass p-8 rounded-[2.5rem] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] -mr-64 -mt-64"></div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 relative z-10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="psychology">psychology</span>
+</div>
+<div>
+<h3 class="text-2xl font-headline font-bold text-white">AI Risk Forecast</h3>
+<p class="text-sm text-slate-500">Sentinel Intelligence Model v4.2 â€” Next 72 Hours</p>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white">Confidence: 94.2%</span>
+<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white">Updated: 4 mins ago</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-4 relative z-10">
+<div class="lg:col-span-2 space-y-6">
+<!-- Visual placeholder for a line chart -->
+<div class="h-64 relative flex items-end gap-1">
+<div class="absolute inset-0 flex flex-col justify-between py-2 border-l border-white/10 pointer-events-none">
+<span class="text-[8px] text-slate-600 uppercase font-bold">Critical</span>
+<span class="text-[8px] text-slate-600 uppercase font-bold">High</span>
+<span class="text-[8px] text-slate-600 uppercase font-bold">Moderate</span>
+<span class="text-[8px] text-slate-600 uppercase font-bold">Low</span>
+</div>
+<!-- Mock data bars/lines -->
+<div class="flex-1 bg-white/5 h-[20%] rounded-t-sm relative group">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-slate-900 px-2 py-1 rounded text-[10px] text-white">Mon 00:00</div>
+</div>
+<div class="flex-1 bg-white/5 h-[25%] rounded-t-sm"></div>
+<div class="flex-1 bg-white/5 h-[30%] rounded-t-sm"></div>
+<div class="flex-1 bg-blue-500/20 h-[45%] rounded-t-sm border-t-2 border-blue-400"></div>
+<div class="flex-1 bg-blue-500/20 h-[55%] rounded-t-sm border-t-2 border-blue-400"></div>
+<div class="flex-1 bg-warning/20 h-[70%] rounded-t-sm border-t-2 border-warning"></div>
+<div class="flex-1 bg-danger/20 h-[85%] rounded-t-sm border-t-2 border-danger"></div>
+<div class="flex-1 bg-critical/20 h-[92%] rounded-t-sm border-t-2 border-critical"></div>
+<div class="flex-1 bg-danger/20 h-[75%] rounded-t-sm border-t-2 border-danger"></div>
+<div class="flex-1 bg-warning/20 h-[50%] rounded-t-sm border-t-2 border-warning"></div>
+<div class="flex-1 bg-blue-500/20 h-[35%] rounded-t-sm border-t-2 border-blue-400"></div>
+<div class="flex-1 bg-white/5 h-[25%] rounded-t-sm"></div>
+</div>
+<div class="flex justify-between text-[10px] text-slate-500 font-bold uppercase tracking-widest px-4">
+<span>Mon 12:00</span>
+<span>Tue 00:00</span>
+<span>Tue 12:00</span>
+<span>Wed 00:00</span>
+<span>Wed 12:00</span>
+</div>
+</div>
+<div class="space-y-6">
+<h4 class="text-xs font-bold text-blue-400 uppercase tracking-widest">Intelligence Insights</h4>
+<ul class="space-y-4">
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-sm text-blue-400 mt-0.5" data-icon="auto_awesome">auto_awesome</span>
+<p class="text-sm text-slate-300 leading-relaxed">Rainfall expected to peak <span class="text-white font-bold">Tuesday evening (18:00)</span> with an estimated 120mm in 4 hours.</p>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-sm text-blue-400 mt-0.5" data-icon="auto_awesome">auto_awesome</span>
+<p class="text-sm text-slate-300 leading-relaxed">Soil saturation in Kerala sector has reached <span class="text-white font-bold">88%</span>, increasing risk of landslides.</p>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-sm text-blue-400 mt-0.5" data-icon="auto_awesome">auto_awesome</span>
+<p class="text-sm text-slate-300 leading-relaxed">Hydrodynamic models suggest downstream pressure on <span class="text-white font-bold">Gandak barrage</span> will exceed safety limits by Wed AM.</p>
+</li>
+</ul>
+<button class="w-full py-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all font-bold text-xs text-white uppercase tracking-widest flex items-center justify-center gap-2">
+                                Download Prediction PDF <span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-8 border-t border-white/5 bg-[#091421] flex flex-col md:flex-row justify-between items-center px-12 gap-4">
+<div class="flex items-center gap-4">
+<span class="text-slate-400 font-bold font-headline">FS</span>
+<p class="text-xs font-inter text-slate-500 tracking-normal">Â© 2024 FloodSense India. Sentinel Intelligence Layer.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-xs font-inter text-slate-500 hover:text-white transition-colors" href="#">Privacy Protocol</a>
+<a class="text-xs font-inter text-slate-500 hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="text-xs font-inter text-slate-500 hover:text-white transition-colors" href="#">API Access</a>
+</div>
+</footer>
+</body></html>
