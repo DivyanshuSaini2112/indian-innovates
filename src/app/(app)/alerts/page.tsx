@@ -5,6 +5,8 @@ import { RiskPill } from "@/components/RiskPill";
 import type { Alert } from "@/types";
 import { timeAgo } from "@/lib/utils";
 import { X, Map, Info } from "lucide-react";
+import Link from "next/link";
+import { estimateFloodLevelCm, getControlMeasures } from "@/lib/floodGuidance";
 
 const SEVERITIES = ["All", "Critical", "High", "Medium", "Low"] as const;
 const SOURCES = ["IMD", "CWC", "NDMA", "AI"] as const;
@@ -126,12 +128,34 @@ export default function AlertsPage() {
           </div>
           <div>
             <p className="text-xs text-muted uppercase tracking-widest mb-2">Recommended Actions</p>
-            <ul className="text-sm text-muted space-y-1.5">
-              <li>• Stay updated on official NDMA channels</li>
-              <li>• Avoid flooded or waterlogged roads</li>
-              <li>• NDRF Helpline: <span className="text-foreground font-medium">1078</span></li>
-              <li>• State control room: <span className="text-foreground font-medium">1070</span></li>
-            </ul>
+            {(() => {
+              const scoreFallback = selected.riskScore ?? (selected.severity === "Critical" ? 90 : selected.severity === "High" ? 70 : selected.severity === "Medium" ? 45 : 20);
+              const floodCm = selected.floodLevelCm ?? estimateFloodLevelCm(scoreFallback);
+              const measures = getControlMeasures(selected.severity, floodCm);
+              return (
+                <div className="text-sm text-muted space-y-3">
+                  <p className="text-muted leading-relaxed">
+                    {measures.shortSummary}
+                    <span className="block text-xs text-muted mt-2">Flood depth estimate: ~{floodCm}cm</span>
+                  </p>
+                  <div className="space-y-1.5">
+                    {measures.groups.slice(0, 3).map((g) => (
+                      <div key={g.title} className="pt-2 border-t border-white/8">
+                        <div className="text-xs text-muted uppercase tracking-widest mb-1">{g.title}</div>
+                        <ul className="space-y-1">
+                          {g.items.slice(0, 4).map((item) => (
+                            <li key={item} className="flex gap-2">
+                              <span className="text-white/20 shrink-0">•</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
           </div>
           <Link href={`/district/${selected.district.toLowerCase()}`}
             className="mt-4 block w-full text-center py-3 bg-primary/20 border border-primary/30 text-primary rounded-xl text-sm hover:bg-primary/30 transition">
@@ -142,6 +166,3 @@ export default function AlertsPage() {
     </div>
   );
 }
-
-// Fix unresolved import
-import Link from "next/link";

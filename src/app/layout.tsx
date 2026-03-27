@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
-import { auth } from "@/lib/auth";
-import SessionProvider from "@/components/providers/SessionProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -27,17 +25,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const session = await auth();
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#020B18" />
+        <meta name="theme-color" content="#1A2A3F" />
       </head>
-      <body className="bg-background text-foreground antialiased">
-        <SessionProvider session={session}>
-          {children}
-        </SessionProvider>
+      <body className="bg-background text-foreground antialiased" suppressHydrationWarning>
+        {children}
       </body>
     </html>
   );

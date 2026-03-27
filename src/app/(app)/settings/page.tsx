@@ -1,6 +1,6 @@
 export default function SettingsPage() {
   const sources = [
-    { abbr: "OMT", name: "Open-Meteo", status: "Connected", freq: "15 min", ok: true },
+    { abbr: "OWM", name: "OpenWeatherMap", status: "Connected", freq: "15 min", ok: true },
     { abbr: "IMD", name: "India Meteorological Department", status: "Simulated", freq: "30 min", ok: true },
     { abbr: "CWC", name: "Central Water Commission", status: "Simulated", freq: "30 min", ok: true },
     { abbr: "NDMA", name: "NDMA Alert Feed", status: "Simulated", freq: "1 hour", ok: true },

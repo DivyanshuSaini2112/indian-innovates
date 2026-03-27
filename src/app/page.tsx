@@ -1,12 +1,9 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useSession, signOut } from "next-auth/react";
-import { signIn } from "next-auth/react";
-import { ArrowRight, Droplets, MapPin, Bell,  Shield } from "lucide-react";
+import { ArrowRight, Droplets, MapPin, Bell, Shield } from "lucide-react";
 
 export default function Home() {
-  const { data: session } = useSession();
 
   return (
     <div className="min-h-screen bg-background">
@@ -14,17 +11,7 @@ export default function Home() {
       <nav className="sticky top-0 z-50 border-b border-white/8 backdrop-blur-xl bg-background/80 px-8 py-4 flex items-center justify-between">
         <span className="font-heading font-semibold text-lg tracking-[0.15em]">FLOOD<span className="text-primary">SENSE</span></span>
         <div className="flex items-center gap-3">
-          {session ? (
-            <>
-              <Link href="/dashboard" className="px-4 py-2 text-sm text-muted hover:text-foreground transition">Dashboard</Link>
-              <button onClick={() => signOut()} className="px-4 py-2 text-sm text-muted hover:text-foreground transition">Sign Out</button>
-            </>
-          ) : (
-            <>
-              <Link href="/login" className="px-4 py-2 text-sm text-muted hover:text-foreground transition">Sign In</Link>
-              <Link href="/register" className="px-5 py-2 bg-primary text-white text-sm rounded-full hover:bg-primary/90 transition font-medium">Get Started</Link>
-            </>
-          )}
+          <Link href="/dashboard" className="px-4 py-2 text-sm text-muted hover:text-foreground transition">Dashboard</Link>
         </div>
       </nav>
 
@@ -50,26 +37,17 @@ export default function Home() {
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}
             className="text-muted text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            Monitor all 700+ districts. Get AI-powered flood risk predictions 48 hours early. Powered by IMD, CWC, and Open-Meteo data.
+            Monitor all 700+ districts. Get AI-powered flood risk predictions 48 hours early. Powered by IMD, CWC, and OpenWeatherMap data.
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
             className="flex flex-wrap items-center justify-center gap-4">
-            {session ? (
-              <Link href="/dashboard" className="flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-semibold text-lg hover:shadow-[0_0_30px_rgba(26,111,212,0.5)] hover:bg-primary/90 transition-all">
-                Open Dashboard <ArrowRight className="w-5 h-5" />
-              </Link>
-            ) : (
-              <>
-                <button onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
-                  className="flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-semibold text-lg hover:shadow-[0_0_30px_rgba(26,111,212,0.5)] hover:bg-primary/90 transition-all">
-                  Get Started Free <ArrowRight className="w-5 h-5" />
-                </button>
-                <Link href="/map" className="px-8 py-4 glass rounded-full font-semibold text-foreground border border-white/15 hover:bg-white/8 transition-all text-lg">
-                  View Live Map
-                </Link>
-              </>
-            )}
+            <Link href="/dashboard" className="flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-semibold text-lg hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] hover:bg-primary/90 transition-all">
+              Open Dashboard <ArrowRight className="w-5 h-5" />
+            </Link>
+            <Link href="/map" className="px-8 py-4 glass rounded-full font-semibold text-foreground border border-white/15 hover:bg-white/8 transition-all text-lg">
+              View Live Map
+            </Link>
           </motion.div>
         </div>
       </div>
@@ -111,18 +89,15 @@ export default function Home() {
       <div className="border-t border-white/8 py-20 px-8 text-center">
         <h2 className="font-heading text-4xl font-semibold text-foreground mb-4">Ready to get started?</h2>
         <p className="text-muted mb-8">Join thousands of professionals monitoring India&apos;s flood risk in real time.</p>
-        {!session && (
-          <button onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
-            className="px-10 py-4 bg-primary text-white rounded-full font-semibold text-lg hover:shadow-[0_0_30px_rgba(26,111,212,0.5)] transition-all inline-flex items-center gap-2">
-            Sign Up with Google — Free <ArrowRight className="w-5 h-5" />
-          </button>
-        )}
+        <Link href="/dashboard"
+          className="px-10 py-4 bg-primary text-white rounded-full font-semibold text-lg hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all inline-flex items-center gap-2">
+          Open Dashboard <ArrowRight className="w-5 h-5" />
+        </Link>
       </div>
 
       {/* Footer */}
       <footer className="border-t border-white/8 px-8 py-6 text-center text-muted text-xs">
-        © 2025 FloodSense India · Data: IMD, NDMA, CWC, Open-Meteo ·{" "}
-        <Link href="/login" className="text-primary hover:underline">Sign In</Link>
+        © 2025 FloodSense India · Data: IMD, NDMA, CWC, Open-Meteo
       </footer>
     </div>
   );

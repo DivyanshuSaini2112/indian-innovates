@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { fetchMultipleDistricts, generateAlertsFromWeather, DEFAULT_DISTRICTS } from "@/lib/api";
+import { estimateFloodLevelCm } from "@/lib/floodGuidance";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,8 @@ export async function GET() {
       state: "Kerala",
       timestamp: new Date(Date.now() - 30 * 60000).toISOString(),
       read: false,
+      riskScore: 72,
+      floodLevelCm: estimateFloodLevelCm(72),
     },
     {
       id: "cwc-001",
@@ -31,6 +34,8 @@ export async function GET() {
       state: "Bihar",
       timestamp: new Date(Date.now() - 90 * 60000).toISOString(),
       read: false,
+      riskScore: 68,
+      floodLevelCm: estimateFloodLevelCm(68),
     },
     {
       id: "ndma-001",
@@ -42,6 +47,8 @@ export async function GET() {
       state: "Assam",
       timestamp: new Date(Date.now() - 3 * 3600000).toISOString(),
       read: true,
+      riskScore: 45,
+      floodLevelCm: estimateFloodLevelCm(45),
     },
   ];
 

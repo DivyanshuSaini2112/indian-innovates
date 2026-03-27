@@ -13,7 +13,9 @@ const TABS = [
 ];
 
 export default function ProfilePage() {
-  const { data: session, status } = useSession();
+  const sessionState = useSession();
+  const session = sessionState?.data;
+  const status = sessionState?.status ?? "unauthenticated";
   const [tab, setTab] = useState("info");
   const [notifs, setNotifs] = useState({ email: true, sms: false, push: true, whatsapp: false });
 

@@ -1,7 +1,6 @@
 import { fetchMultipleDistricts, generateAlertsFromWeather, DEFAULT_DISTRICTS } from "@/lib/api";
 import { RISK_COLORS } from "@/lib/utils";
 import Link from "next/link";
-import type { DistrictWeather } from "@/types";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 900;

@@ -2,16 +2,16 @@
 
 @layer base {
   :root {
-    --color-background:  #020B18;
-    --color-foreground:  #F0F4FF;
-    --color-muted:       #6B7FA3;
-    --color-card:        rgba(255, 255, 255, 0.04);
-    --color-border:      rgba(255, 255, 255, 0.08);
-    --color-primary:     #1A6FD4;
-    --color-danger:      #E85D24;
-    --color-safe:        #1D9E75;
-    --color-warning:     #F0A500;
-    --color-critical:    #C0392B;
+    --color-background:  #0D1B2A;
+    --color-foreground:  #F5F7FF;
+    --color-muted:       #94A3B8;
+    --color-card:        rgba(45, 212, 191, 0.08);
+    --color-border:      rgba(45, 212, 191, 0.15);
+    --color-primary:     #2DD4BF;
+    --color-danger:      #FF5757;
+    --color-safe:        #10B981;
+    --color-warning:     #FBBF24;
+    --color-critical:    #F97316;
   }
 
   html {
@@ -72,27 +72,27 @@
   .border-t-critical { border-top-color: var(--color-critical); }
 
   /* Opacity modifiers for custom colors */
-  .bg-primary\/5    { background-color: rgba(26, 111, 212, 0.05); }
-  .bg-primary\/10   { background-color: rgba(26, 111, 212, 0.10); }
-  .bg-primary\/20   { background-color: rgba(26, 111, 212, 0.20); }
-  .bg-primary\/30   { background-color: rgba(26, 111, 212, 0.30); }
-  .bg-danger\/5     { background-color: rgba(232,  93,  36, 0.05); }
-  .bg-danger\/10    { background-color: rgba(232,  93,  36, 0.10); }
-  .bg-danger\/20    { background-color: rgba(232,  93,  36, 0.20); }
-  .bg-safe\/20      { background-color: rgba( 29, 158, 117, 0.20); }
-  .bg-warning\/20   { background-color: rgba(240, 165,   0, 0.20); }
-  .bg-critical\/5   { background-color: rgba(192,  57,  43, 0.05); }
-  .bg-critical\/20  { background-color: rgba(192,  57,  43, 0.20); }
+  .bg-primary\/5    { background-color: rgba(45, 212, 191, 0.05); }
+  .bg-primary\/10   { background-color: rgba(45, 212, 191, 0.10); }
+  .bg-primary\/20   { background-color: rgba(45, 212, 191, 0.20); }
+  .bg-primary\/30   { background-color: rgba(45, 212, 191, 0.30); }
+  .bg-danger\/5     { background-color: rgba(255, 87, 87, 0.05); }
+  .bg-danger\/10    { background-color: rgba(255, 87, 87, 0.10); }
+  .bg-danger\/20    { background-color: rgba(255, 87, 87, 0.20); }
+  .bg-safe\/20      { background-color: rgba(16, 185, 129, 0.20); }
+  .bg-warning\/20   { background-color: rgba(251, 191, 36, 0.20); }
+  .bg-critical\/5   { background-color: rgba(249, 115, 22, 0.05); }
+  .bg-critical\/20  { background-color: rgba(249, 115, 22, 0.20); }
 
-  .border-primary\/30  { border-color: rgba(26, 111, 212, 0.30); }
-  .border-primary\/40  { border-color: rgba(26, 111, 212, 0.40); }
-  .border-primary\/60  { border-color: rgba(26, 111, 212, 0.60); }
-  .border-safe\/30     { border-color: rgba( 29, 158, 117, 0.30); }
-  .border-warning\/30  { border-color: rgba(240, 165,   0, 0.30); }
-  .border-danger\/20   { border-color: rgba(232,  93,  36, 0.20); }
-  .border-danger\/30   { border-color: rgba(232,  93,  36, 0.30); }
-  .border-critical\/20 { border-color: rgba(192,  57,  43, 0.20); }
-  .border-critical\/30 { border-color: rgba(192,  57,  43, 0.30); }
+  .border-primary\/30  { border-color: rgba(45, 212, 191, 0.30); }
+  .border-primary\/40  { border-color: rgba(45, 212, 191, 0.40); }
+  .border-primary\/60  { border-color: rgba(45, 212, 191, 0.60); }
+  .border-safe\/30     { border-color: rgba(16, 185, 129, 0.30); }
+  .border-warning\/30  { border-color: rgba(251, 191, 36, 0.30); }
+  .border-danger\/20   { border-color: rgba(255, 87, 87, 0.20); }
+  .border-danger\/30   { border-color: rgba(255, 87, 87, 0.30); }
+  .border-critical\/20 { border-color: rgba(249, 115, 22, 0.20); }
+  .border-critical\/30 { border-color: rgba(249, 115, 22, 0.30); }
   .border-white\/5  { border-color: rgba(255, 255, 255, 0.05); }
   .border-white\/8  { border-color: rgba(255, 255, 255, 0.08); }
   .border-white\/10 { border-color: rgba(255, 255, 255, 0.10); }
@@ -100,11 +100,11 @@
 
   .hover\:bg-white\/5:hover    { background-color: rgba(255, 255, 255, 0.05); }
   .hover\:bg-white\/8:hover    { background-color: rgba(255, 255, 255, 0.08); }
-  .hover\:bg-primary\/10:hover { background-color: rgba(26, 111, 212, 0.10); }
-  .hover\:bg-primary\/30:hover { background-color: rgba(26, 111, 212, 0.30); }
-  .hover\:bg-danger\/5:hover   { background-color: rgba(232, 93, 36, 0.05); }
-  .hover\:bg-danger\/10:hover  { background-color: rgba(232, 93, 36, 0.10); }
-  .hover\:border-primary\/40:hover { border-color: rgba(26, 111, 212, 0.40); }
+  .hover\:bg-primary\/10:hover { background-color: rgba(45, 212, 191, 0.10); }
+  .hover\:bg-primary\/30:hover { background-color: rgba(45, 212, 191, 0.30); }
+  .hover\:bg-danger\/5:hover   { background-color: rgba(255, 87, 87, 0.05); }
+  .hover\:bg-danger\/10:hover  { background-color: rgba(255, 87, 87, 0.10); }
+  .hover\:border-primary\/40:hover { border-color: rgba(45, 212, 191, 0.40); }
   .hover\:border-white\/10:hover   { border-color: rgba(255, 255, 255, 0.10); }
 
   .hover\:bg-white\/5:hover { background-color: rgba(255, 255, 255, 0.05); }
@@ -116,4 +116,92 @@
 
   .font-heading { font-family: var(--font-heading), system-ui, sans-serif; }
   .scrollbar-thin { scrollbar-width: thin; }
+
+  /* Rainfall Animations */
+  @keyframes rainDrop {
+    0% {
+      transform: translateY(-10px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes rainPulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.7; }
+    50% { transform: scaleY(1.15); opacity: 1; }
+  }
+
+  @keyframes rainBarGrow {
+    from {
+      opacity: 0;
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+    to {
+      opacity: 0.8;
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes rainShimmer {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+
+  @keyframes rainGlow {
+    0%, 100% { box-shadow: 0 0 10px rgba(45, 212, 191, 0.0), inset 0 0 10px rgba(45, 212, 191, 0.0); }
+    50% { box-shadow: 0 0 20px rgba(45, 212, 191, 0.3), inset 0 0 8px rgba(45, 212, 191, 0.1); }
+  }
+
+  .rain-drop {
+    animation: rainDrop 1.5s ease-in infinite;
+    transform-origin: top center;
+  }
+
+  .rain-bar {
+    animation: rainBarGrow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+    transform-origin: bottom;
+  }
+
+  .rain-pulse {
+    animation: rainPulse 2s ease-in-out infinite;
+  }
+
+  .rain-glow {
+    animation: rainGlow 2.5s ease-in-out infinite;
+  }
+
+  /* Rainfall number pulse */
+  .rainfall-stat {
+    transition: all 0.3s ease;
+  }
+
+  .rainfall-stat:hover {
+    transform: scale(1.05);
+  }
+
+  /* Custom Select Styling */
+  select {
+    color-scheme: dark;
+  }
+
+  select option {
+    background-color: #0D1B2A;
+    color: #F5F7FF;
+    padding: 8px;
+  }
+
+  select option:hover {
+    background-color: #2DD4BF;
+    color: #0D1B2A;
+  }
+
+  select option:checked {
+    background: linear-gradient(#2DD4BF, #2DD4BF);
+    background-color: #2DD4BF;
+    color: #0D1B2A;
+  }
 }

@@ -9,15 +9,40 @@ export function cn(...inputs: ClassValue[]) {
 /** Compute a 0-100 risk score from rainfall data */
 export function computeRiskScore(rainfall24h: number, rainfall7d: number): number {
   // IMD thresholds: Heavy = 64.5mm, Very Heavy = 115.6mm, Extremely Heavy = 204.4mm
-  const score24h = Math.min(100, (rainfall24h / 200) * 100);
-  const score7d   = Math.min(100, (rainfall7d  / 500) * 70);
-  return Math.round(score24h * 0.6 + score7d * 0.4);
+  // More aggressive scoring to properly classify high rainfall districts as high risk
+  
+  // 24h component: weighted heavily since intense rainfall is immediate danger
+  let score24h: number;
+  if (rainfall24h < 20) {
+    score24h = (rainfall24h / 20) * 20; // 0-20mm → 0-20 points
+  } else if (rainfall24h < 65) {
+    score24h = 20 + ((rainfall24h - 20) / 45) * 30; // 20-65mm → 20-50 points
+  } else if (rainfall24h < 115) {
+    score24h = 50 + ((rainfall24h - 65) / 50) * 30; // 65-115mm → 50-80 points
+  } else {
+    score24h = 80 + Math.min(20, ((rainfall24h - 115) / 100) * 20); // 115mm+ → 80-100 points
+  }
+  
+  // 7d component: captures sustained rainfall patterns
+  let score7d: number;
+  if (rainfall7d < 100) {
+    score7d = (rainfall7d / 100) * 25; // 0-100mm → 0-25 points
+  } else if (rainfall7d < 300) {
+    score7d = 25 + ((rainfall7d - 100) / 200) * 30; // 100-300mm → 25-55 points
+  } else if (rainfall7d < 500) {
+    score7d = 55 + ((rainfall7d - 300) / 200) * 25; // 300-500mm → 55-80 points
+  } else {
+    score7d = 80 + Math.min(20, ((rainfall7d - 500) / 300) * 20); // 500mm+ → 80-100 points
+  }
+  
+  // Weighted combination: 65% 24h (immediate threat), 35% 7d (sustained)
+  return Math.round(score24h * 0.65 + score7d * 0.35);
 }
 
 export function getRiskLevel(score: number): RiskLevel {
-  if (score >= 80) return "Critical";
-  if (score >= 60) return "High";
-  if (score >= 35) return "Medium";
+  if (score >= 75) return "Critical";
+  if (score >= 50) return "High";
+  if (score >= 25) return "Medium";
   return "Low";
 }
 

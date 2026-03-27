@@ -4,6 +4,7 @@ import { RiskPill } from "@/components/RiskPill";
 import { DistrictCard } from "@/components/DistrictCard";
 import Link from "next/link";
 import { AlertTriangle, Droplets, Waves, TrendingUp, Plus } from "lucide-react";
+import { getRiskModelStatus } from "@/lib/riskModel";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 900; // 15 min
@@ -15,6 +16,7 @@ export default async function DashboardPage() {
   // Fetch live weather data for default districts
   const districts = await fetchMultipleDistricts(DEFAULT_DISTRICTS);
   const alerts = generateAlertsFromWeather(districts);
+  const modelStatus = getRiskModelStatus();
 
   const totalRainfall = districts.reduce((a, d) => a + d.rainfall24h, 0) / (districts.length || 1);
   const highRiskCount = districts.filter(d => d.riskScore >= 60).length;
@@ -76,8 +78,14 @@ export default async function DashboardPage() {
           {[
             { label: "National Alert Level", value: highRiskCount > 3 ? "HIGH" : highRiskCount > 1 ? "MODERATE" : "LOW", sub: `${highRiskCount} districts elevated`, icon: <AlertTriangle className="w-5 h-5 text-danger" />, border: "border-t-danger" },
             { label: "Districts in Red", value: String(highRiskCount).padStart(2, "0"), sub: "Across monitored districts", icon: <TrendingUp className="w-5 h-5 text-critical" />, border: "border-t-critical" },
-            { label: "Avg Rainfall Today", value: `${totalRainfall.toFixed(0)}mm`, sub: "Open-Meteo live data", icon: <Droplets className="w-5 h-5 text-primary" />, border: "border-t-primary" },
-            { label: "Rivers Above Danger", value: String(Math.max(0, highRiskCount - 1)).padStart(2, "0"), sub: "Estimated from rainfall", icon: <Waves className="w-5 h-5 text-warning" />, border: "border-t-warning" },
+            { label: "Avg Rainfall Today", value: `${totalRainfall.toFixed(0)}mm`, sub: "OpenWeatherMap live data", icon: <Droplets className="w-5 h-5 text-primary" />, border: "border-t-primary" },
+            {
+              label: "ML Model Training",
+              value: modelStatus.ready ? "READY" : "LEARNING",
+              sub: `${modelStatus.sampleCount}/${modelStatus.minSamplesForPredict} live samples`,
+              icon: <Waves className="w-5 h-5 text-warning" />,
+              border: "border-t-warning",
+            },
           ].map(card => (
             <div key={card.label} className={`glass rounded-2xl p-5 border-t-2 ${card.border}`}>
               <div className="flex justify-between items-start mb-4">
@@ -166,14 +174,19 @@ export default async function DashboardPage() {
           <div className="glass rounded-2xl p-6">
             <h3 className="font-heading font-semibold text-foreground mb-1">AI Risk Forecast — Next 72 Hours</h3>
             <p className="text-muted text-xs mb-5">
-              Based on {districts[0].name}, {districts[0].state} — Open-Meteo live data · updated {new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })} IST
+              Based on {districts[0].name}, {districts[0].state} — OpenWeatherMap live data · updated {new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })} IST
             </p>
             <div className="h-24 flex items-end gap-1 mb-4">
               {districts[0].forecast.slice(0, 24).map((pt, i) => {
                 const v = Math.min(100, pt.rain * 20);
                 return (
-                  <div key={i} className="flex-1 rounded-t-sm relative"
-                    style={{ height: `${Math.max(4, v)}%`, background: v > 70 ? "#E85D24" : v > 40 ? "#F0A500" : "#1A6FD4", opacity: 0.7 }}>
+                  <div key={i} className="flex-1 rounded-t-sm relative rain-bar rain-glow"
+                    style={{ 
+                      height: `${Math.max(4, v)}%`, 
+                      background: v > 70 ? "#E85D24" : v > 40 ? "#F0A500" : "#1A6FD4", 
+                      opacity: 0.7,
+                      animationDelay: `${i * 0.05}s`
+                    }}>
                     <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-sm" style={{ background: v > 70 ? "#E85D24" : v > 40 ? "#F0A500" : "#1A6FD4" }} />
                   </div>
                 );
@@ -184,6 +197,11 @@ export default async function DashboardPage() {
               <p className="flex gap-2"><span className="text-warning shrink-0">•</span>7-day total: <span className="text-foreground font-medium">{districts[0].rainfall7d.toFixed(1)}mm</span></p>
               <p className="flex gap-2"><span className={districts[0].riskScore >= 60 ? "text-danger" : "text-safe"}>•</span>Risk: <span className="text-foreground font-medium">{districts[0].riskLevel} ({districts[0].riskScore}/100)</span></p>
             </div>
+            <p className="text-xs text-muted mt-3">
+              Prediction source: <span className="text-foreground">{districts[0].predictionSource ?? "rule_based"}</span> ·
+              Model status: <span className="text-foreground">{modelStatus.ready ? "ready" : "training"}</span> ·
+              Samples: <span className="text-foreground">{modelStatus.sampleCount}</span>
+            </p>
           </div>
         )}
       </main>

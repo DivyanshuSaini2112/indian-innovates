@@ -7,7 +7,7 @@ import { Plus, X, Loader2 } from "lucide-react";
 import { DISTRICT_COORDS } from "@/types";
 
 const ALL_DISTRICTS = Object.keys(DISTRICT_COORDS);
-const DEFAULT_DISTRICTS = ["kottayam", "patna", "bhubaneswar", "guwahati", "surat"];
+const DEFAULT_DISTRICTS = ALL_DISTRICTS;
 
 export default function MyDistrictsPage() {
   const [districts,  setDistricts]  = useState<DistrictWeather[]>([]);
@@ -17,16 +17,43 @@ export default function MyDistrictsPage() {
   const [search,     setSearch]     = useState("");
 
   useEffect(() => {
-    setLoading(true);
+    let cancelled = false;
+    const timer = setTimeout(() => {
+      if (!cancelled) setLoading(true);
+    }, 0);
+
     fetch(`/api/weather?districts=${keys.join(",")}`)
       .then(r => r.json())
-      .then(d => { setDistricts(d.districts ?? []); setLoading(false); });
+      .then(d => {
+        if (cancelled) return;
+        setDistricts(d.districts ?? []);
+      })
+      .finally(() => {
+        if (cancelled) return;
+        clearTimeout(timer);
+        setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
   }, [keys]);
 
   const removeDistrict = (name: string) => setKeys(prev => prev.filter(k => k !== name.toLowerCase()));
-  const addDistrict = (key: string) => { setKeys(prev => prev.includes(key) ? prev : [...prev, key]); setShowModal(false); };
+  const addDistrict = (key: string) => { 
+    const normalizedKey = key.trim().toLowerCase();
+    setKeys(prev => prev.includes(normalizedKey) ? prev : [...prev, normalizedKey]); 
+    setShowModal(false); 
+    setSearch("");
+  };
 
   const filtered = ALL_DISTRICTS.filter(k => k.includes(search.toLowerCase()) && !keys.includes(k));
+  const normalizedSearch = search.trim().toLowerCase();
+  // Allow adding any typed district (including those not in predefined list)
+  const canAddTypedDistrict =
+    normalizedSearch.length > 0 &&
+    !keys.includes(normalizedSearch);
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-8">
@@ -73,8 +100,9 @@ export default function MyDistrictsPage() {
               <h2 className="font-heading font-semibold text-foreground text-xl">Add Districts</h2>
               <button onClick={() => setShowModal(false)} className="text-muted hover:text-foreground"><X className="w-5 h-5" /></button>
             </div>
-            <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search districts..."
+            <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Type any district name (e.g. 'Mumbai', 'Bangalore', 'Amritsar')..."
               className="w-full glass rounded-xl px-4 py-3 text-foreground text-sm border border-white/10 focus:border-primary/60 outline-none mb-4 bg-transparent" />
+            <div className="text-xs text-muted mb-3">💡 Type any district from India — or select from trending ones below:</div>
             <div className="flex flex-wrap gap-2 max-h-60 overflow-y-auto">
               {filtered.slice(0, 30).map(k => (
                 <button key={k} onClick={() => addDistrict(k)}
@@ -82,6 +110,14 @@ export default function MyDistrictsPage() {
                   {k}
                 </button>
               ))}
+              {canAddTypedDistrict && (
+                <button
+                  onClick={() => addDistrict(normalizedSearch)}
+                  className="px-4 py-2 bg-primary/20 rounded-full text-xs font-medium text-primary border border-primary/50 hover:bg-primary/30 hover:border-primary transition capitalize w-full text-center mt-2"
+                >
+                  ✓ Add &ldquo;{normalizedSearch}&rdquo;
+                </button>
+              )}
             </div>
           </div>
         </div>

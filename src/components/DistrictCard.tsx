@@ -53,14 +53,17 @@ export function DistrictCard({ name, state, riskScore, riskLevel, rainfall24h, r
           </div>
         </div>
 
-        {/* Sparkline */}
-        <div className="flex items-end gap-0.5 h-8">
+        {/* Sparkline - Color coded by rainfall - FULL WIDTH */}
+        <div className="flex items-end gap-0.5 h-12 -mx-5 px-5 bg-background/30 rounded-b-lg">
           {mini.map((v, i) => (
-            <div key={i} className="flex-1 rounded-sm transition-all"
+            <div key={i} className="flex-1 rounded-sm rain-bar"
               style={{
                 height: `${Math.min(100, v)}%`,
-                background: v > 70 ? "#E85D24" : v > 50 ? "#F0A500" : "#1A6FD4",
-                opacity: 0.65,
+                background: v > 100 ? "#C0392B" : v > 80 ? "#E85D24" : v > 60 ? "#F0A500" : "#1A6FD4",
+                opacity: 0.75,
+                minHeight: "3px",
+                boxShadow: `0 0 8px ${v > 80 ? "rgba(232, 93, 36, 0.3)" : v > 60 ? "rgba(240, 165, 0, 0.3)" : "rgba(26, 111, 212, 0.3)"}`,
+                animationDelay: `${i * 0.06}s`
               }}
             />
           ))}

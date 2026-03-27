@@ -1,12 +1,29 @@
 import { fetchDistrictWeather } from "@/lib/api";
-import { DISTRICT_COORDS } from "@/types";
 import { RiskPill } from "@/components/RiskPill";
 import { RISK_COLORS } from "@/lib/utils";
-import { ArrowLeft, Share2, Droplets, AlertTriangle, Shield } from "lucide-react";
+import { ArrowLeft, Share2, Droplets, AlertTriangle } from "lucide-react";
 import Link from "next/link";
+import { ControlMeasures } from "@/components/ControlMeasures";
+import { estimateFloodLevelCm } from "@/lib/floodGuidance";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 900;
+
+function seeded01(seed: string) {
+  // Deterministic pseudo-random in [0, 1), avoiding Math.random() during render.
+  let h = 2166136261;
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  // Math.sin is pure; we only use it to derive a stable float.
+  const x = Math.sin(h) * 10000;
+  return x - Math.floor(x);
+}
+
+function seededRange(seed: string, min: number, max: number) {
+  return min + seeded01(seed) * (max - min);
+}
 
 export default async function DistrictPage({ params }: { params: Promise<{ name: string }> }) {
   const { name } = await params;
@@ -25,7 +42,7 @@ export default async function DistrictPage({ params }: { params: Promise<{ name:
   }
 
   const riskColor = RISK_COLORS[data.riskLevel];
-  const riverPct = data.riverLevel && data.dangerMark ? data.riverLevel / data.dangerMark : 0;
+  const floodLevelCm = estimateFloodLevelCm(data.riskScore);
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-8">
@@ -40,7 +57,12 @@ export default async function DistrictPage({ params }: { params: Promise<{ name:
             <RiskPill level={data.riskLevel} className="animate-pulse px-4 py-1.5 text-sm" />
             <div className="flex items-center gap-1.5">
               <div className="w-2 h-2 rounded-full bg-safe animate-pulse" />
-              <span className="text-muted text-xs">Live · Open-Meteo</span>
+              <span className="text-muted text-xs">
+                Live · {data.weatherSource ?? "OpenWeatherMap"}
+                {!data.openWeatherConfigured && (
+                  <span className="block text-[11px] text-muted/80 mt-0.5">OpenWeather key not configured (server fallback)</span>
+                )}
+              </span>
             </div>
           </div>
           <p className="text-muted text-lg mt-1">{data.state}, India</p>
@@ -55,13 +77,24 @@ export default async function DistrictPage({ params }: { params: Promise<{ name:
         style={{ background: data.riskScore > 75 ? "linear-gradient(180deg,#1a0505 0%,#2d0b0b 100%)" : data.riskScore > 50 ? "linear-gradient(180deg,#0f1a0a 0%,#1a2810 100%)" : "linear-gradient(180deg,#0a1628 0%,#020B18 100%)" }}>
         {/* Rain */}
         {data.rainfall24h > 20 && Array.from({ length: Math.min(60, data.rainfall24h * 0.5) }).map((_, i) => (
-          <div key={i} className="absolute w-px bg-blue-400/25"
-            style={{ height: `${8 + Math.random() * 12}px`, left: `${Math.random() * 100}%`, top: `${Math.random() * 80}%`, animationDelay: `${Math.random() * 2}s` }} />
+          <div key={i} className="absolute w-px bg-blue-400/25 rain-drop"
+            style={{
+              height: `${8 + seededRange(`${data.name}-rain-h-${i}`, 0, 1) * 12}px`,
+              left: `${seededRange(`${data.name}-rain-left-${i}`, 0, 1) * 100}%`,
+              top: `${seededRange(`${data.name}-rain-top-${i}`, 0, 1) * 80}%`,
+              animationDuration: `${1.2 + seededRange(`${data.name}-rain-speed-${i}`, 0, 1) * 0.8}s`,
+              animationDelay: `${seededRange(`${data.name}-rain-delay-${i}`, 0, 1) * 2}s`,
+            }} />
         ))}
         {/* Buildings SVG */}
         <svg className="absolute bottom-0 left-0 right-0 w-full" viewBox="0 0 500 200" preserveAspectRatio="xMidYMax slice">
           {Array.from({ length: 12 }).map((_, i) => (
-            <rect key={i} x={i * 42 + 5} y={200 - (30 + Math.random() * 60)} width={35} height={30 + Math.random() * 60}
+            <rect
+              key={i}
+              x={i * 42 + 5}
+              y={200 - (30 + seededRange(`${data.name}-b-y-${i}`, 0, 1) * 60)}
+              width={35}
+              height={30 + seededRange(`${data.name}-b-h-${i}`, 0, 1) * 60}
               fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" strokeWidth="0.5" rx="2" />
           ))}
           {/* Water level */}
@@ -83,7 +116,7 @@ export default async function DistrictPage({ params }: { params: Promise<{ name:
             <Droplets className="w-4 h-4 text-primary" /> Rainfall Stats
           </h3>
           {[["24 Hours", data.rainfall24h], ["7 Days", data.rainfall7d], ["30 Days (est.)", data.rainfall30d]].map(([label, val]) => (
-            <div key={String(label)} className="mb-4 last:mb-0">
+            <div key={String(label)} className="mb-4 last:mb-0 rainfall-stat">
               <div className="flex justify-between text-sm mb-1.5">
                 <span className="text-muted">{label}</span>
                 <span className="text-foreground font-medium">{Number(val).toFixed(1)}mm</span>
@@ -95,7 +128,7 @@ export default async function DistrictPage({ params }: { params: Promise<{ name:
           ))}
           <div className="mt-4 pt-4 border-t border-white/8 text-xs text-muted flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-safe animate-pulse" />
-            Source: Open-Meteo API · Live
+            Source: {data.weatherSource ?? "OpenWeatherMap"} · Live
           </div>
         </div>
 
@@ -143,21 +176,15 @@ export default async function DistrictPage({ params }: { params: Promise<{ name:
         </div>
       </div>
 
-      {/* Causes / Effects / Mitigation */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-        {[
-          { icon: <Droplets className="w-5 h-5 text-primary" />, title: "Causes", items: ["Prolonged heavy rainfall", "Upstream catchment overflow", "Poor drainage capacity", "Low-lying terrain"] },
-          { icon: <AlertTriangle className="w-5 h-5 text-danger" />, title: "Effects", items: ["Inundation of low-lying areas", "Road/transport disruption", "Risk of waterborne disease", "Agricultural crop damage"] },
-          { icon: <Shield className="w-5 h-5 text-safe" />, title: "Mitigation", items: ["Follow evacuation advisories", "Avoid flood-prone roads", "NDRF Helpline: 1078", `Relief centers: ${data.riskScore > 60 ? "4 active" : "On standby"}`] },
-        ].map(card => (
-          <div key={card.title} className="glass rounded-2xl p-6">
-            <div className="mb-3">{card.icon}</div>
-            <h3 className="font-heading font-semibold text-foreground mb-3">{card.title}</h3>
-            <ul className="space-y-1.5">
-              {card.items.map(item => <li key={item} className="text-muted text-sm flex gap-2"><span className="text-white/20 shrink-0">•</span>{item}</li>)}
-            </ul>
-          </div>
-        ))}
+      {/* Control measures tuned to flood level */}
+      <div className="mb-8">
+        <ControlMeasures
+          district={data.name}
+          state={data.state}
+          riskLevel={data.riskLevel}
+          riskScore={data.riskScore}
+          floodLevelCm={data.floodLevelCm ?? floodLevelCm}
+        />
       </div>
 
       {/* 72h forecast chart */}
