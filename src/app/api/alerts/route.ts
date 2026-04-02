@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { fetchMultipleDistricts, generateAlertsFromWeather, DEFAULT_DISTRICTS } from "@/lib/api";
 import { estimateFloodLevelCm } from "@/lib/floodGuidance";
+import { sendBulkAlertSMS } from "@/lib/sms";
 
 export const dynamic = "force-dynamic";
 
@@ -54,4 +55,27 @@ export async function GET() {
 
   const allAlerts = [...weatherAlerts, ...imdAlerts];
   return NextResponse.json({ alerts: allAlerts });
+}
+
+/** POST — manual alert trigger from the Operations dashboard */
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    const { district, state, riskLevel, riskScore, rainfall24h, floodLevelCm } = body;
+    if (!district || riskScore == null) {
+      return NextResponse.json({ error: "Missing district or riskScore" }, { status: 400 });
+    }
+    const entries = await sendBulkAlertSMS({
+      district,
+      state:        state        ?? "India",
+      riskLevel:    riskLevel    ?? "High",
+      riskScore:    Number(riskScore),
+      rainfall24h:  Number(rainfall24h ?? 0),
+      floodLevelCm: floodLevelCm !== undefined ? Number(floodLevelCm) : undefined,
+    });
+    return NextResponse.json({ success: true, smsSent: entries.length, entries });
+  } catch (err) {
+    console.error("[/api/alerts POST]", err);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
 }

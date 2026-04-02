@@ -163,6 +163,13 @@ export type OpenWeatherHourlyForecast = {
   currentWind: number;
 };
 
+/**
+ * Uses FREE OpenWeather endpoints:
+ *  - data/2.5/weather  → current conditions (temp, humidity, wind, rain)
+ *  - data/2.5/forecast → 5-day / 3h forecast (40 slots, free tier)
+ *
+ * This replaces the paywalled One Call 3.0 endpoint.
+ */
 export async function fetchHourlyForecast(
   lat: number,
   lon: number,
@@ -171,42 +178,81 @@ export async function fetchHourlyForecast(
   if (!apiKey) return null;
 
   try {
-    const url = new URL("https://api.openweathermap.org/data/3.0/onecall");
-    url.searchParams.set("lat", String(lat));
-    url.searchParams.set("lon", String(lon));
-    url.searchParams.set("units", "metric");
-    url.searchParams.set("appid", apiKey);
+    /* ── 1. Current weather (free) ── */
+    const currentUrl = new URL("https://api.openweathermap.org/data/2.5/weather");
+    currentUrl.searchParams.set("lat",   String(lat));
+    currentUrl.searchParams.set("lon",   String(lon));
+    currentUrl.searchParams.set("units", "metric");
+    currentUrl.searchParams.set("appid", apiKey);
 
-    const res = await fetch(url.toString(), { next: { revalidate: 900 } });
-    if (!res.ok) return null;
+    const currentRes = await fetch(currentUrl.toString(), { next: { revalidate: 900 } });
+    if (!currentRes.ok) return null;
+    const currentJson = (await currentRes.json().catch(() => null)) as Record<string, unknown> | null;
+    if (!currentJson) return null;
 
-    const json = (await res.json().catch(() => null)) as unknown;
-    if (!json || typeof json !== "object") return null;
+    const mainBlock = currentJson.main as Record<string, unknown> | undefined;
+    const windBlock = currentJson.wind as Record<string, unknown> | undefined;
+    const rainBlock = currentJson.rain as Record<string, unknown> | undefined;
 
-    const data = json as Record<string, unknown>;
-    const current = data.current as Record<string, unknown> | undefined;
-    const hourly = (data.hourly as Array<Record<string, unknown>>) ?? [];
-    const daily = (data.daily as Array<Record<string, unknown>>) ?? [];
+    const currentTemp     = coerceFiniteNumber(mainBlock?.temp)     ?? 28;
+    const currentHumidity = coerceFiniteNumber(mainBlock?.humidity) ?? 70;
+    const currentWindMps  = coerceFiniteNumber(windBlock?.speed)    ?? 0;
+    const currentRain1h   = coerceFiniteNumber(rainBlock?.["1h"])   ?? 0;
 
-    if (!current || hourly.length === 0) return null;
+    /* ── 2. 5-day / 3h forecast (free) ── */
+    const forecastUrl = new URL("https://api.openweathermap.org/data/2.5/forecast");
+    forecastUrl.searchParams.set("lat",   String(lat));
+    forecastUrl.searchParams.set("lon",   String(lon));
+    forecastUrl.searchParams.set("units", "metric");
+    forecastUrl.searchParams.set("cnt",   "40");          // max 40 slots = 5 days
+    forecastUrl.searchParams.set("appid", apiKey);
 
-    const hourlyRain: number[] = hourly.map(h => {
-      const rain = h.rain as Record<string, unknown> | undefined;
-      return (coerceFiniteNumber(rain?.['1h']) ?? coerceFiniteNumber(h.precipitation) ?? 0);
-    });
-    const hourlyTemp: number[] = hourly.map(h => coerceFiniteNumber(h.temp) ?? 0);
-    const hourlyHumidity: number[] = hourly.map(h => coerceFiniteNumber(h.humidity) ?? 70);
-    const hourlyWind: number[] = hourly.map(h => (coerceFiniteNumber(h.wind_speed) ?? 0) * 3.6);
-    const hourlyTime: string[] = hourly.map(h => {
-      const ts = coerceFiniteNumber(h.dt);
-      return ts !== null ? new Date(ts * 1000).toISOString() : new Date().toISOString();
-    });
-    const dailyRain: number[] = daily.map((d) => coerceFiniteNumber(d.rain) ?? 0);
+    const forecastRes = await fetch(forecastUrl.toString(), { next: { revalidate: 900 } });
+    if (!forecastRes.ok) return null;
+    const forecastJson = (await forecastRes.json().catch(() => null)) as Record<string, unknown> | null;
+    if (!forecastJson) return null;
 
-    const current24hRain = hourlyRain.slice(-24).reduce((a, b) => a + b, 0);
-    const currentTemp = coerceFiniteNumber(current.temp) ?? 28;
-    const currentHumidity = coerceFiniteNumber(current.humidity) ?? 70;
-    const currentWind = ((coerceFiniteNumber(current.wind_speed) ?? 0) * 3.6);
+    const slots = (forecastJson.list as Array<Record<string, unknown>>) ?? [];
+    if (slots.length === 0) return null;
+
+    /* Each slot covers 3 hours — expand to pseudo-hourly by repeating each 3 times */
+    const hourlyRain:     number[] = [];
+    const hourlyTemp:     number[] = [];
+    const hourlyHumidity: number[] = [];
+    const hourlyWind:     number[] = [];
+    const hourlyTime:     string[] = [];
+    const dailyMap       = new Map<string, number>();
+
+    for (const slot of slots) {
+      const mainS = slot.main  as Record<string, unknown> | undefined;
+      const windS = slot.wind  as Record<string, unknown> | undefined;
+      const rainS = slot.rain  as Record<string, unknown> | undefined;
+      const ts    = coerceFiniteNumber(slot.dt);
+      const dt    = ts !== null ? new Date(ts * 1000) : new Date();
+
+      const rain3h = coerceFiniteNumber(rainS?.["3h"]) ?? 0;
+      const rain1h = rain3h / 3;                         // average per hour
+      const temp   = coerceFiniteNumber(mainS?.temp)     ?? currentTemp;
+      const humid  = coerceFiniteNumber(mainS?.humidity) ?? currentHumidity;
+      const wind   = (coerceFiniteNumber(windS?.speed)   ?? 0) * 3.6;
+
+      // Spread each 3h slot into 3 × 1h buckets
+      for (let i = 0; i < 3; i++) {
+        const slotTime = new Date(dt.getTime() + i * 3_600_000).toISOString();
+        hourlyRain.push(rain1h);
+        hourlyTemp.push(temp);
+        hourlyHumidity.push(humid);
+        hourlyWind.push(wind);
+        hourlyTime.push(slotTime);
+      }
+
+      // Accumulate daily totals
+      const dayKey = dt.toISOString().slice(0, 10);
+      dailyMap.set(dayKey, (dailyMap.get(dayKey) ?? 0) + rain3h);
+    }
+
+    const dailyRain = Array.from(dailyMap.values());
+    const current24hRain = hourlyRain.slice(0, 24).reduce((a, b) => a + b, 0) + currentRain1h;
 
     return {
       hourlyRain,
@@ -218,7 +264,7 @@ export async function fetchHourlyForecast(
       current24hRain,
       currentTemp,
       currentHumidity,
-      currentWind,
+      currentWind: currentWindMps * 3.6,
     };
   } catch (err) {
     console.error("fetchHourlyForecast error:", err);
